@@ -1,37 +1,24 @@
 .UsaList {}
 
-.state-list--container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: var(--spacing-medium);
-    margin-top: var(--spacing-xx-large);
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    margin-top: var(--spacing-xx-large);
-    padding: var(--spacing-medium);
-    width: calc(100% - var(--spacing-medium) * 4);
-}
 
-.state-list--header {
+.state-list-header {
     font-size: var(--font-size-large);
     font-weight: var(--font-weight-bold);
     font-family: var(--font-family-headline);
     color: var(--headline-color);
     text-align: center;
+    margin: var(--spacing-large) 0;
 }
 
-.state-list--sort {
+.state-list-sort {
     display: flex;
     gap: var(--spacing-small);
     justify-content: space-around;
     width: 100%;
+    margin-bottom: var(--spacing-medium);
 }
 
-.state-list--sort__button {
+.state-list-sort-button {
     font-size: var(--font-size-small);
     font-weight: var(--font-weight-bold);
     font-family: var(--font-family-body);
@@ -51,7 +38,7 @@
     width: calc(100% - var(--spacing-medium) * 2);
 }
 
-.state-list__item--header {
+.state-list-item-header {
     font-size: var(--font-size-small);
     font-weight: var(--font-weight-bold);
     text-wrap: wrap;
@@ -59,14 +46,14 @@
     margin-bottom: var(--spacing-x-small);
 }
 
-.state-list__item {
+.state-list-item {
     display: flex;
     gap: var(--spacing-small);
     font-size: var(--font-size-small);
     font-family: var(--font-family-body);
 }
 
-.state-list__item--fill {
+.state-list-item-fill {
     width: 10px;
     height: 10px;
 }

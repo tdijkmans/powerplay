@@ -11,7 +11,6 @@
     cursor: pointer;
     border-radius: 5px;
     width: max-content;
-
 }
 
 .context-menu div {
@@ -37,35 +36,30 @@
 
 .context-indicator {
     display: flex;
-
 }
 
-.context-indicator--title {
+.context-indicator-title {
     font-size: var(--font-size-small);
     font-family: var(--font-family-body);
     font-weight: var(--font-weight-bold);
     margin-right: var(--spacing-small);
 }
 
-
-
 .context-indicator-rep,
 .context-indicator-dem,
 .context-indicator-und {
     width: 10px;
     height: 10px;
-
-
 }
 
-.context-indicator--rep {
+.context-indicator-rep {
     background-color: var(--color-republican);
 }
 
-.context-indicator--dem {
+.context-indicator-dem {
     background-color: var(--color-democrat);
 }
 
-.context-indicator--und {
+.context-indicator-und {
     background-color: var(--color-undecided);
 }
