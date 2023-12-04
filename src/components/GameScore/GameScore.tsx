@@ -3,7 +3,7 @@ import useGlobalStore from "../../stores/useGlobalStore";
 import { getPartyColor } from "../../utilities";
 import "./GameScore.scss";
 
-type GameScoreProps = {}
+type GameScoreProps = Record<string, unknown>;
 
 const GameScore: FC<GameScoreProps> = () => {
 	const democratScore = useGlobalStore((state) => state.score.democrat);

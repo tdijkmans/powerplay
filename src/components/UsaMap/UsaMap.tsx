@@ -9,7 +9,7 @@ import ContextMenu from "../ContextMenu/ContextMenu";
 import MapContours from "./MapContours";
 import "./UsaMap.scss";
 
-type UsaMapProps = {}
+type UsaMapProps = Record<string, unknown>;
 
 const UsaMap: FC<UsaMapProps> = () => {
 	const initialStates = stateData.map((s) => ({
@@ -77,9 +77,8 @@ const UsaMap: FC<UsaMapProps> = () => {
 						<g
 							key={state.id}
 							id={state.id}
-							className={`state-group ${
-								hoveredState?.id === state.id ? "hovered" : ""
-							}`}
+							className={`state-group ${hoveredState?.id === state.id ? "hovered" : ""
+								}`}
 						>
 							<path
 								id={state.id}

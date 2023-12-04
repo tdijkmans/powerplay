@@ -3,7 +3,7 @@ import { stateData } from "../../data/stateData";
 import { getPartyColor } from "../../utilities";
 import "./UsaList.scss";
 
-type UsaListProps = {}
+type UsaListProps = Record<string, unknown>;
 
 const UsaList: FC<UsaListProps> = () => {
 	const stateList = stateData.map((s) => ({

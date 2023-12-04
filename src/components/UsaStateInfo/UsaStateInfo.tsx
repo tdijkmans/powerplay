@@ -3,7 +3,7 @@ import { useHoveredState } from "../../hooks/useHoveredState";
 import { getPartyColor } from "../../utilities";
 import "./UsaStateInfo.scss";
 
-type UsaStateInfoProps = {}
+type UsaStateInfoProps = Record<string, unknown>;
 
 const UsaStateInfo: FC<UsaStateInfoProps> = () => {
 	const hoveredState = useHoveredState((state) => state.hoveredState);
