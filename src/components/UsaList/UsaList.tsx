@@ -3,7 +3,7 @@ import { stateData } from "../../data/stateData";
 import { getPartyColor } from "../../utilities";
 import "./UsaList.scss";
 
-interface UsaListProps {}
+type UsaListProps = {}
 
 const UsaList: FC<UsaListProps> = () => {
 	const stateList = stateData.map((s) => ({
@@ -77,7 +77,7 @@ const UsaList: FC<UsaListProps> = () => {
 
 				<div className="state-list">
 					<div className="state-list__item state-list__item--header">Nr.</div>
-					<div className="state-list__item state-list__item--header"></div>
+					<div className="state-list__item state-list__item--header" />
 					<div className="state-list__item state-list__item--header">Staat</div>
 					<div className="state-list__item state-list__item--header">#</div>
 					<div className="state-list__item state-list__item--header">P</div>
@@ -99,7 +99,7 @@ const UsaList: FC<UsaListProps> = () => {
 							<div
 								className="state-list__item state-list__item--fill"
 								style={{ backgroundColor: state.fill }}
-							></div>
+							/>
 						</React.Fragment>
 					))}
 				</div>

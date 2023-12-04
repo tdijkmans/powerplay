@@ -12,16 +12,16 @@ function App() {
 				<ZoomControl />
 				<UsaStateInfo />{" "}
 			</div>
-			<div className="div2"></div>
-			<div className="div3"></div>
+			<div className="div2" />
+			<div className="div3" />
 			<div className="div4">4</div>
 			<div className="div5">
 				<UsaMap />
 			</div>
-			<div className="div6"></div>
+			<div className="div6" />
 
 			<div className="div7"> 7</div>
-			<div className="div8"></div>
+			<div className="div8" />
 			<div className="div9">
 				<GameScore />
 			</div>

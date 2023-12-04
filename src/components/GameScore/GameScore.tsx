@@ -3,7 +3,7 @@ import useGlobalStore from "../../stores/useGlobalStore";
 import { getPartyColor } from "../../utilities";
 import "./GameScore.scss";
 
-interface GameScoreProps {}
+type GameScoreProps = {}
 
 const GameScore: FC<GameScoreProps> = () => {
 	const democratScore = useGlobalStore((state) => state.score.democrat);
@@ -52,7 +52,7 @@ const GameScore: FC<GameScoreProps> = () => {
 									height: "20px",
 									backgroundColor: item.color,
 								}}
-							></div>
+							/>
 							<div>{item.label}</div>
 						</div>
 						<div className="score-item--score">{item.score}</div>

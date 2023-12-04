@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useZoom } from "../../hooks/useZoom";
 import "./ZoomControl.scss";
 
-interface ZoomControlProps {}
+type ZoomControlProps = {}
 
 const ZoomControl: FC<ZoomControlProps> = () => {
 	const scale = useZoom((state) => state.scale);

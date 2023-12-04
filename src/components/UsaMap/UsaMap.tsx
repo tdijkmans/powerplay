@@ -9,7 +9,7 @@ import ContextMenu from "../ContextMenu/ContextMenu";
 import MapContours from "./MapContours";
 import "./UsaMap.scss";
 
-interface UsaMapProps {}
+type UsaMapProps = {}
 
 const UsaMap: FC<UsaMapProps> = () => {
 	const initialStates = stateData.map((s) => ({

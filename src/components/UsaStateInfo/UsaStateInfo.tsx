@@ -3,7 +3,7 @@ import { useHoveredState } from "../../hooks/useHoveredState";
 import { getPartyColor } from "../../utilities";
 import "./UsaStateInfo.scss";
 
-interface UsaStateInfoProps {}
+type UsaStateInfoProps = {}
 
 const UsaStateInfo: FC<UsaStateInfoProps> = () => {
 	const hoveredState = useHoveredState((state) => state.hoveredState);
@@ -15,7 +15,7 @@ const UsaStateInfo: FC<UsaStateInfoProps> = () => {
 					height: "20px",
 					backgroundColor: getPartyColor(hoveredState.party),
 				}}
-			></div>
+			/>
 			<p>
 				{hoveredState.stateSlogan} - {hoveredState.stateName} -{" "}
 				{hoveredState.electoralVotes} kiesmannen

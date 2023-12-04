@@ -32,7 +32,7 @@ const ContextMenu: FC<ContextMenuProps> = ({
 						className="context-indicator"
 						onClick={() => onOptionClick("republican")}
 					>
-						<div className="context-indicator--rep"></div>
+						<div className="context-indicator--rep" />
 						<div>Republikeinen</div>
 					</div>
 
@@ -40,14 +40,14 @@ const ContextMenu: FC<ContextMenuProps> = ({
 						className="context-indicator"
 						onClick={() => onOptionClick("democrat")}
 					>
-						<div className="context-indicator--dem"></div>
+						<div className="context-indicator--dem" />
 						<div>Democraten</div>
 					</div>
 					<div
 						className="context-indicator"
 						onClick={() => onOptionClick("swing")}
 					>
-						<div className="context-indicator--und"></div>
+						<div className="context-indicator--und" />
 						<div>Onbeslist</div>
 					</div>
 				</div>
