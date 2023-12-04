@@ -12,9 +12,15 @@ const ZoomControl: FC<ZoomControlProps> = () => {
 	return (
 		<div className="ZoomControl">
 			Zoom {percentageZoom}
-			<button onClick={() => setScale(scale + 0.1)}>+</button>
-			<button onClick={() => setScale(1)}>Reset</button>
-			<button onClick={() => setScale(scale - 0.1)}>-</button>
+			<button type="button" onClick={() => setScale(scale + 0.1)}>
+				+
+			</button>
+			<button type="button" onClick={() => setScale(1)}>
+				Reset
+			</button>
+			<button type="button" onClick={() => setScale(scale - 0.1)}>
+				-
+			</button>
 		</div>
 	);
 };

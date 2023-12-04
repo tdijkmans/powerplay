@@ -31,6 +31,7 @@ const ContextMenu: FC<ContextMenuProps> = ({
 					<div
 						className="context-indicator"
 						onClick={() => onOptionClick("republican")}
+						onKeyDown={() => onOptionClick("republican")}
 					>
 						<div className="context-indicator--rep" />
 						<div>Republikeinen</div>
@@ -39,6 +40,7 @@ const ContextMenu: FC<ContextMenuProps> = ({
 					<div
 						className="context-indicator"
 						onClick={() => onOptionClick("democrat")}
+						onKeyDown={() => onOptionClick("democrat")}
 					>
 						<div className="context-indicator--dem" />
 						<div>Democraten</div>
@@ -46,6 +48,7 @@ const ContextMenu: FC<ContextMenuProps> = ({
 					<div
 						className="context-indicator"
 						onClick={() => onOptionClick("swing")}
+						onKeyDown={() => onOptionClick("swing")}
 					>
 						<div className="context-indicator--und" />
 						<div>Onbeslist</div>
@@ -55,6 +58,7 @@ const ContextMenu: FC<ContextMenuProps> = ({
 			<div
 				className={`overlay ${isVisible ? "visible" : ""}`}
 				onClick={onHide}
+				onKeyDown={onHide}
 			/>
 		</>
 	);

@@ -56,6 +56,12 @@ const UsaMap: FC<UsaMapProps> = () => {
 		setContextMenuPosition({ top: e.clientY - 250, left: e.clientX - 250 });
 	};
 
+	const handleKeyPress = (e: React.KeyboardEvent<SVGElement>) => {
+		if (e.key === "Enter") {
+			showContextMenu(e as unknown as React.MouseEvent<SVGElement, MouseEvent>);
+		}
+	};
+
 	return (
 		<div className="UsaMap">
 			<>
@@ -71,14 +77,16 @@ const UsaMap: FC<UsaMapProps> = () => {
 					transform={`scale(${scale})`}
 					fill="none"
 				>
+					<title>usa-map</title>
 					<MapContours />
 
 					{sortedStates?.map((state) => (
 						<g
 							key={state.id}
 							id={state.id}
-							className={`state-group ${hoveredState?.id === state.id ? "hovered" : ""
-								}`}
+							className={`state-group ${
+								hoveredState?.id === state.id ? "hovered" : ""
+							}`}
 						>
 							<path
 								id={state.id}
@@ -86,6 +94,7 @@ const UsaMap: FC<UsaMapProps> = () => {
 								onClick={showContextMenu}
 								onMouseEnter={handleMouseEnter}
 								onMouseLeave={handleMouseLeave}
+								onKeyDown={handleKeyPress}
 								d={state.d}
 								data-id={state.id}
 								data-name={state.stateName}
@@ -102,6 +111,7 @@ const UsaMap: FC<UsaMapProps> = () => {
 								stroke="white"
 								strokeWidth="1px"
 								onClick={showContextMenu}
+								onKeyDown={handleKeyPress}
 							>
 								{state.id}
 							</text>
