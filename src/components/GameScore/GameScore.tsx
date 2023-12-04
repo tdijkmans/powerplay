@@ -41,24 +41,22 @@ const GameScore: FC<GameScoreProps> = () => {
 	}));
 
 	return (
-		<div className="GameScore">
-			<div className="score">
-				{items.map((item) => (
-					<div className="score__item" key={item.key}>
-						<div className="score-item--label">
-							<div
-								style={{
-									width: "20px",
-									height: "20px",
-									backgroundColor: item.color,
-								}}
-							/>
-							<div>{item.label}</div>
-						</div>
-						<div className="score-item--score">{item.score}</div>
+		<div className="score">
+			{items.map((item) => (
+				<div className="score-item" key={item.key}>
+					<div className="score-item-label">
+						<div
+							style={{
+								width: "20px",
+								height: "20px",
+								backgroundColor: item.color,
+							}}
+						/>
+						<div>{item.label}</div>
 					</div>
-				))}
-			</div>
+					<div className="score-item-score">{item.score}</div>
+				</div>
+			))}
 		</div>
 	);
 };

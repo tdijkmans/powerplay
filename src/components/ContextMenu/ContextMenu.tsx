@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Party, UsaState } from "../../data/stateData.interface";
+import Card from "../Card/Card";
 import "./ContextMenu.scss";
 
 interface ContextMenuProps {
@@ -20,11 +21,8 @@ const ContextMenu: FC<ContextMenuProps> = ({
 	return (
 		<>
 			{isVisible && (
-				<div
-					className="context-menu"
-					style={{ top: position.top, left: position.left }}
-				>
-					<div className="context-indicator--title">
+				<Card position={position} isMenu>
+					<div className="context-indicator-title">
 						Kies een partij voor {stateName}
 					</div>
 
@@ -33,7 +31,7 @@ const ContextMenu: FC<ContextMenuProps> = ({
 						onClick={() => onOptionClick("republican")}
 						onKeyDown={() => onOptionClick("republican")}
 					>
-						<div className="context-indicator--rep" />
+						<div className="context-indicator-rep" />
 						<div>Republikeinen</div>
 					</div>
 
@@ -42,7 +40,7 @@ const ContextMenu: FC<ContextMenuProps> = ({
 						onClick={() => onOptionClick("democrat")}
 						onKeyDown={() => onOptionClick("democrat")}
 					>
-						<div className="context-indicator--dem" />
+						<div className="context-indicator-dem" />
 						<div>Democraten</div>
 					</div>
 					<div
@@ -50,11 +48,12 @@ const ContextMenu: FC<ContextMenuProps> = ({
 						onClick={() => onOptionClick("swing")}
 						onKeyDown={() => onOptionClick("swing")}
 					>
-						<div className="context-indicator--und" />
+						<div className="context-indicator-und" />
 						<div>Onbeslist</div>
 					</div>
-				</div>
+				</Card>
 			)}
+
 			<div
 				className={`overlay ${isVisible ? "visible" : ""}`}
 				onClick={onHide}

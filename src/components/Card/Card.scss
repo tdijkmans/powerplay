@@ -1,0 +1,8 @@
+.Card {
+    position: absolute;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: var(--spacing-medium);
+    background: #fff;
+}

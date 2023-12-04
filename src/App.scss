@@ -1,0 +1,57 @@
+.container {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  gap: 16px 16px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "NW . N . NE"
+    ". center-board center-board center-board ."
+    "W center-board center-board center-board E"
+    ". center-board center-board center-board ."
+    "SW . S . SE";
+}
+
+.elsewhere {
+  position: absolute;
+  z-index: 10;
+  right: var(--spacing-large);
+  top: var(--spacing-large);
+}
+
+.center-board {
+  grid-area: center-board;
+}
+
+.NE {
+  grid-area: NE;
+}
+
+.N {
+  grid-area: N;
+}
+
+.E {
+  grid-area: E;
+}
+
+.S {
+  grid-area: S;
+}
+
+.W {
+  grid-area: W;
+}
+
+.SE {
+  grid-area: SE;
+}
+
+.NW {
+  grid-area: NW;
+}
+
+.SW {
+  grid-area: SW;
+}

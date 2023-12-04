@@ -7,9 +7,10 @@ interface HoveredStateStore {
 	setHoveredState: (state: UsaState) => void;
 	handleMouseEnter: (e: React.MouseEvent<SVGPathElement, MouseEvent>) => void;
 	handleMouseLeave: (e: React.MouseEvent<SVGPathElement, MouseEvent>) => void;
+	getHoveredStateId: () => string;
 }
 
-export const useHoveredState = create<HoveredStateStore>((set) => ({
+export const useHoveredState = create<HoveredStateStore>((set, get) => ({
 	hoveredState: {
 		id: "",
 		x: 0,
@@ -46,4 +47,11 @@ export const useHoveredState = create<HoveredStateStore>((set) => ({
 			},
 		});
 	},
+	getHoveredStateId: () => {
+		return get().hoveredState.id;
+	}
+
+
 }));
+
+

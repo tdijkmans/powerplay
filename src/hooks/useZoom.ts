@@ -4,10 +4,14 @@ interface ZoomStore {
 	scale: number;
 	handleWheel: (e: React.WheelEvent<SVGSVGElement>) => void;
 	setScale: (scale: number) => void;
+	translateX: number;
+	translateY: number;
+	setTranslateX: (translateX: number) => void;
+	setTranslateY: (translateY: number) => void;
 }
 
 export const useZoom = create<ZoomStore>((set, get) => ({
-	scale: 1.2,
+	scale: 1,
 	handleWheel: (e: React.WheelEvent<SVGSVGElement>) => {
 		if (e.deltaY > 0) {
 			set({ scale: get().scale + 0.1 });
@@ -16,4 +20,9 @@ export const useZoom = create<ZoomStore>((set, get) => ({
 		}
 	},
 	setScale: (scale: number) => set({ scale }),
+	translateX: -127,
+	translateY: 0,
+	setTranslateX: (translateX: number) => set({ translateX }),
+	setTranslateY: (translateY: number) => set({ translateY }),
+
 }));

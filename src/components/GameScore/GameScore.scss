@@ -1,16 +1,4 @@
-.GameScore {}
-
-.score {
-    position: absolute;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-small);
-    margin-left: var(--spacing-large);
-    margin-top: var(--spacing-large);
-}
-
-.score__item {
+.score-item {
     display: flex;
     align-items: center;
     margin-bottom: var(--spacing-small);
@@ -20,13 +8,13 @@
     justify-content: space-between;
 }
 
-.score-item--label {
+.score-item-label {
     display: flex;
     align-items: center;
     gap: var(--spacing-x-small);
 }
 
-.score-item--score {
+.score-item-score {
     font-weight: var(--font-weight-bold);
     margin-left: var(--spacing-small);
 }

@@ -18,8 +18,8 @@ const grandTotal =
 interface GlobalStore {
 	score: typeof initialScore;
 	grandTotal: number;
-	getRepublicanProgress: () => number;
-	getDemocratProgress: () => number;
+	getRepublicanProgress: () => string;
+	getDemocratProgress: () => string;
 	winAState: (
 		party: keyof typeof initialScore,
 		state: (typeof stateData)[0],
@@ -40,10 +40,10 @@ const useGlobalStore = create<GlobalStore>((set, get) => ({
 		return get().grandTotal;
 	},
 	getRepublicanProgress: () => {
-		return ((get().score.republican / grandTotal) * 100) / 2;
+		return (((get().score.republican / grandTotal) * 100)).toFixed(0)
 	},
 	getDemocratProgress: () => {
-		return ((get().score.democrat / grandTotal) * 100) / 2;
+		return (((get().score.democrat / grandTotal) * 100)).toFixed(0)
 	},
 	winAState: (party, state) => {
 		const { electoralVotes } = state;

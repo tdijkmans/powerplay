@@ -34,6 +34,9 @@ const UsaMap: FC<UsaMapProps> = () => {
 	);
 	const scale = useZoom((state) => state.scale);
 	const handleWheel = useZoom((state) => state.handleWheel);
+	const x = useZoom((state) => state.translateX);
+	const y = useZoom((state) => state.translateY);
+
 	const hideContextMenu = () => {
 		setContextMenuVisible(false);
 	};
@@ -63,80 +66,78 @@ const UsaMap: FC<UsaMapProps> = () => {
 	};
 
 	return (
-		<div className="UsaMap">
-			<>
-				<svg
-					onWheel={handleWheel}
-					className="board"
-					xmlns="http://www.w3.org/2000/svg"
-					id="board-graphic"
-					width={1000}
-					height={589}
-					strokeLinejoin="round"
-					stroke="#000"
-					transform={`scale(${scale})`}
-					fill="none"
-				>
-					<title>usa-map</title>
-					<MapContours />
+		<>
+			<svg
+				onWheel={handleWheel}
+				className="board"
+				xmlns="http://www.w3.org/2000/svg"
+				id="board-graphic"
+				width={1000}
+				height={589}
+				strokeLinejoin="round"
+				stroke="#000"
+				transform={`scale(${scale}) translate(${x}, ${y})`}
+				fill="none"
+			>
+				<title>usa-map</title>
+				<MapContours />
 
-					{sortedStates?.map((state) => (
-						<g
-							key={state.id}
+				{sortedStates?.map((state) => (
+					<g
+						key={state.id}
+						id={state.id}
+						className={`state-group ${
+							hoveredState?.id === state.id ? "hovered" : ""
+						}`}
+					>
+						<path
 							id={state.id}
-							className={`state-group ${
-								hoveredState?.id === state.id ? "hovered" : ""
-							}`}
+							key={state.id}
+							onClick={showContextMenu}
+							onMouseEnter={handleMouseEnter}
+							onMouseLeave={handleMouseLeave}
+							onKeyDown={handleKeyPress}
+							d={state.d}
+							data-id={state.id}
+							data-name={state.stateName}
+							fill={state.fill}
+							opacity={state.opacity}
+							stroke={hoveredState?.id === state.id ? "white" : ""}
+						/>
+						<text
+							x={state?.x}
+							y={state?.y}
+							textAnchor="middle"
+							fontSize="12px"
+							fill="white"
+							stroke="white"
+							strokeWidth="1px"
+							onClick={showContextMenu}
+							onKeyDown={handleKeyPress}
 						>
-							<path
-								id={state.id}
-								key={state.id}
-								onClick={showContextMenu}
-								onMouseEnter={handleMouseEnter}
-								onMouseLeave={handleMouseLeave}
-								onKeyDown={handleKeyPress}
-								d={state.d}
-								data-id={state.id}
-								data-name={state.stateName}
-								fill={state.fill}
-								opacity={state.opacity}
-								stroke={hoveredState?.id === state.id ? "white" : ""}
-							/>
-							<text
-								x={state?.x}
-								y={state?.y}
-								textAnchor="middle"
-								fontSize="12px"
-								fill="white"
-								stroke="white"
-								strokeWidth="1px"
-								onClick={showContextMenu}
-								onKeyDown={handleKeyPress}
-							>
-								{state.id}
-							</text>
-							<text
-								x={state?.x}
-								y={state?.y + 16}
-								textAnchor="middle"
-								fontSize="12px"
-								stroke="white"
-							>
-								{state.electoralVotes}
-							</text>
-						</g>
-					))}
-				</svg>
+							{state.id}
+						</text>
+						<text
+							x={state?.x}
+							y={state?.y + 16}
+							textAnchor="middle"
+							fontSize="12px"
+							stroke="white"
+						>
+							{state.electoralVotes}
+						</text>
+					</g>
+				))}
+			</svg>
 
-				<ContextMenu
-					stateName={clickedState.stateName}
-					isVisible={contextMenuVisible}
-					position={contextMenuPosition}
-					onOptionClick={handleOptionClick}
-					onHide={hideContextMenu}
-				/>
-			</>
-		</div>
+			<ContextMenu
+				stateName={clickedState.stateName}
+				isVisible={contextMenuVisible}
+				position={contextMenuPosition}
+				onOptionClick={handleOptionClick}
+				onHide={hideContextMenu}
+			/>
+		</>
 	);
 };
 

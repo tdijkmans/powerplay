@@ -1,4 +1,5 @@
-import "./App.css";
+import "./App.scss";
+import Card from "./components/Card/Card";
 import GameScore from "./components/GameScore/GameScore";
 import UsaList from "./components/UsaList/UsaList";
 import UsaMap from "./components/UsaMap/UsaMap";
@@ -7,29 +8,32 @@ import ZoomControl from "./components/ZoomControl/ZoomControl";
 
 function App() {
 	return (
-		<div className="powerplay-container">
-			<div className="div1">
-				<ZoomControl />
-				<UsaStateInfo />{" "}
+		<>
+			<div className="elsewhere">
+				<Card>
+					<UsaList />
+				</Card>
 			</div>
-			<div className="div2" />
-			<div className="div3" />
-			<div className="div4">4</div>
-			<div className="div5">
-				<UsaMap />
+			<div className="container">
+				<div className="NW">
+					<GameScore />
+				</div>
+				<div className="N">North</div>
+				<div className="NE" />
+				<div className="W">West</div>
+				<div className="center-board">
+					<UsaMap />
+				</div>
+				<div className="E">East</div>
+				<div className="SW">
+					<ZoomControl />
+				</div>
+				<div className="S">
+					<UsaStateInfo />
+				</div>
+				<div className="SE">Southeast</div>
 			</div>
-			<div className="div6" />
-
-			<div className="div7"> 7</div>
-			<div className="div8" />
-			<div className="div9">
-				<GameScore />
-			</div>
-
-			<div className="div10">
-				<UsaList />
-			</div>
-		</div>
+		</>
 	);
 }
 
