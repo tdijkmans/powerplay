@@ -33,13 +33,6 @@ export type WinnableState = UsaState & {
 
 };
 
-const getConversionRateForRepublican = (party: WinnableState['party']) => {
-	return party === 'democrat' ? 3 : party === 'swing' ? 2 : 1
-}
-
-const getConversionRateForDemocrat = (party: WinnableState['party']) => {
-	return party === 'republican' ? 3 : party === 'swing' ? 2 : 1
-}
 
 const statesToWin: WinnableState[] = [...stateData]
 	.sort((a, b) => a.stateName.localeCompare(b.stateName))
