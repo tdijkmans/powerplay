@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
-import "./index.css";
+import "./index.scss";
+import "./reset.scss";
 
 const getRootElem = () => {
 	const rootElem = document.getElementById("root");

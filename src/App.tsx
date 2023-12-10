@@ -4,34 +4,41 @@ import GameScore from "./components/GameScore/GameScore";
 import UsaList from "./components/UsaList/UsaList";
 import UsaMap from "./components/UsaMap/UsaMap";
 import UsaStateInfo from "./components/UsaStateInfo/UsaStateInfo";
-import ZoomControl from "./components/ZoomControl/ZoomControl";
+import UserForm from "./components/UserForm/UserForm";
+import MapControl from "./components/ZoomControl/MapControl";
 
 function App() {
 	return (
 		<>
-			<div className="elsewhere">
-				<Card>
-					<UsaList />
-				</Card>
-			</div>
 			<div className="container">
 				<div className="NW">
-					<GameScore />
+					<Card>
+						<GameScore />
+					</Card>
 				</div>
 				<div className="N">North</div>
 				<div className="NE" />
-				<div className="W">West</div>
+				<div className="W">
+					<Card>
+						<UserForm />
+					</Card>
+				</div>
 				<div className="center-board">
 					<UsaMap />
 				</div>
-				<div className="E">East</div>
+				<div className="E">
+					<Card>
+						<UsaList />
+					</Card>
+				</div>
 				<div className="SW">
-					<ZoomControl />
+					<Card>
+						<MapControl />
+					</Card>
 				</div>
 				<div className="S">
 					<UsaStateInfo />
 				</div>
-				<div className="SE">Southeast</div>
 			</div>
 		</>
 	);

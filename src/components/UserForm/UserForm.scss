@@ -1,0 +1,68 @@
+/* YourComponent.scss or Styled Component */
+.userform__form {
+    padding: var(--spacing-medium);
+    width: calc(100% - var(--spacing-x-large));
+    font-size: var(--font-size-medium);
+
+}
+
+.userform__title {
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-bold);
+    font-family: var(--font-family-headline);
+    color: var(--headline-color);
+    text-align: center;
+    margin: var(--spacing-medium);
+}
+
+.userform__subtitle {
+    margin-bottom: var(--spacing-medium);
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-small);
+}
+
+.userform__democrat {
+    color: var(--color-democrat);
+}
+
+.userform__republican {
+    color: var(--color-republican);
+}
+
+.userform__names {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-x-small);
+
+}
+
+.userform__label {
+    margin-bottom: var(--spacing-small);
+}
+
+.userform__input {
+    padding: var(--spacing-small);
+    margin-bottom: var(--spacing-medium);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.userform__input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 5px var(--color-primary)
+}
+
+.userform__button {
+    padding: var(--spacing-small);
+    margin-top: var(--spacing-small);
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+}

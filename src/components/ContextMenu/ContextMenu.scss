@@ -1,21 +1,7 @@
-.ContextMenu {}
-
-/* ContextMenu.css */
-
-.context-menu {
-    position: absolute;
-    z-index: 1000;
-    background: #fff;
-    border: 1px solid #ccc;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    border-radius: 5px;
-    width: max-content;
-}
-
-.context-menu div {
-    padding: 8px 12px;
-    font-size: 14px;
+.context-menu-container {
+    padding: var(--spacing-small);
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-small);
 }
 
 .overlay {
@@ -36,30 +22,37 @@
 
 .context-indicator {
     display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-x-small);
+    gap: var(--spacing-small);
+
+    &-title {
+        font-weight: var(--font-weight-bold);
+        margin: var(--spacing-small);
+
+    }
+
+    &-republican,
+    &-democrat,
+    &-und {
+        width: 10px;
+        height: 10px;
+    }
+
+    &-republican {
+        background-color: var(--color-republican);
+    }
+
+    &-democrat {
+        background-color: var(--color-democrat);
+    }
+
+    &-und {
+        background-color: var(--color-undecided);
+    }
 }
 
-.context-indicator-title {
-    font-size: var(--font-size-small);
-    font-family: var(--font-family-body);
-    font-weight: var(--font-weight-bold);
-    margin-right: var(--spacing-small);
-}
-
-.context-indicator-rep,
-.context-indicator-dem,
-.context-indicator-und {
-    width: 10px;
-    height: 10px;
-}
-
-.context-indicator-rep {
-    background-color: var(--color-republican);
-}
-
-.context-indicator-dem {
-    background-color: var(--color-democrat);
-}
-
-.context-indicator-und {
-    background-color: var(--color-undecided);
+.context-indicator-divider {
+    background-color: var(--color-text);
+    margin: var(--spacing-medium);
 }

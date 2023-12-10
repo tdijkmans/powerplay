@@ -9,7 +9,7 @@ interface CardProps {
 
 const Card: FC<CardProps> = ({ children, position, isMenu }) => (
 	<div
-		className="Card"
+		className="card"
 		style={{
 			top: position?.top,
 			left: position?.left,

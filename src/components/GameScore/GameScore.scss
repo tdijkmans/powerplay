@@ -1,3 +1,21 @@
+.score {
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-small);
+}
+
+.score-header {
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-bold);
+    font-family: var(--font-family-headline);
+    color: var(--headline-color);
+    margin: var(--spacing-x-small) 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-small);
+}
+
 .score-item {
     display: flex;
     align-items: center;
