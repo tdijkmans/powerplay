@@ -7,51 +7,30 @@ interface HoveredStateStore {
 	setHoveredState: (state: UsaState) => void;
 	handleMouseEnter: (e: React.MouseEvent<SVGPathElement, MouseEvent>) => void;
 	handleMouseLeave: (e: React.MouseEvent<SVGPathElement, MouseEvent>) => void;
-	getHoveredStateId: () => string;
+	getHoveredStateId: () => UsaState["id"];
+	setHoveredStateId: (id: UsaState["id"]) => void;
 }
 
 export const useHoveredState = create<HoveredStateStore>((set, get) => ({
-	hoveredState: {
-		id: "",
-		x: 0,
-		y: 0,
-		d: "",
-		dataId: "",
-		stateName: "",
-		party: "swing",
-		electoralVotes: 0,
-		capital: "",
-		stateSlogan: "",
-	},
+	hoveredState: {} as UsaState,
 	setHoveredState: (state) => set({ hoveredState: state }),
+	setHoveredStateId: (id) => {
+		const hoveredState = stateData.find((state) => state.id === id);
+		if (hoveredState) {
+			set({ hoveredState });
+		}
+	},
 	handleMouseEnter: (e) => {
 		const id = e.currentTarget.getAttribute("data-id");
-		const state = stateData.find((state) => state.id === id);
-		if (state) {
-			set({ hoveredState: state });
+		const hoveredState = stateData.find((state) => state.id === id);
+		if (hoveredState) {
+			set({ hoveredState });
 		}
 	},
 	handleMouseLeave: () => {
-		set({
-			hoveredState: {
-				id: "",
-				x: 0,
-				y: 0,
-				d: "",
-				dataId: "",
-				stateName: "",
-				party: "swing",
-				electoralVotes: 0,
-				capital: "",
-				stateSlogan: "",
-			},
-		});
+		set({ hoveredState: {} as UsaState });
 	},
 	getHoveredStateId: () => {
 		return get().hoveredState.id;
-	}
-
-
+	},
 }));
-
-

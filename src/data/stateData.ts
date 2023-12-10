@@ -1,6 +1,5 @@
-import { UsaState } from "./stateData.interface";
 
-export const stateData: UsaState[] = [
+export const stateData = [
 	{
 		id: "MA",
 		x: 939,
@@ -613,4 +612,6 @@ export const stateData: UsaState[] = [
 		capital: "Juneau",
 		stateSlogan: "The Last Frontier",
 	},
-];
+] as const;
+
+

@@ -1,136 +1,125 @@
-import React, { FC, useState } from "react";
-import { stateData } from "../../data/stateData";
+import { FC, useState } from "react";
 import { useHoveredState } from "../../hooks/useHoveredState";
+import useGlobalStore, {
+	GlobalStore,
+	WinnableState,
+} from "../../stores/useGlobalStore";
 import { getPartyColor } from "../../utilities";
 import "./UsaList.scss";
 
-type UsaListProps = Record<string, unknown>;
+type SortOrder = "asc" | "desc";
 
-const UsaList: FC<UsaListProps> = () => {
-	const stateList = stateData.map((s) => ({
-		...s,
-		fill: getPartyColor(s.party),
-	}));
-
-	const hoveredState = useHoveredState((state) => state.getHoveredStateId());
-	const getBackgroundColor = (stateId: string) => ({
-		backgroundColor: hoveredState === stateId ? "#eee" : "transparent",
-	});
-
-	const [sortableStateList, setSortableStateList] = useState(stateList);
-	const [sortOrder, setSortOrder] = useState("asc");
-	const [sortColumn, setSortColumn] = useState("id");
-
-	const handleClick = (column: keyof UsaListProps) => {
-		setSortColumn(column);
-		const sortedList = [...sortableStateList];
+const sortList = (
+	list: WinnableState[],
+	column: keyof WinnableState,
+	sortOrder: SortOrder,
+) => {
+	const sortFunction = (a: WinnableState, b: WinnableState) => {
 		switch (column) {
 			case "id":
-				sortedList.sort((a, b) => a.id.localeCompare(b.id));
-				break;
-			case "electoralVotes":
-				sortedList.sort((a, b) => a.electoralVotes - b.electoralVotes);
-				break;
+			case "wonBy":
+			case "stateName":
 			case "party":
-				sortedList.sort((a, b) => a.party.localeCompare(b.party));
-				break;
+				return a[column].localeCompare(b[column]);
+
+			case "electoralVotes":
+				return a[column] - b[column];
+
 			default:
-				break;
+				return 0;
 		}
+	};
+	const sortedList = [...list].sort(sortFunction);
+	return sortOrder === "desc" ? sortedList.reverse() : sortedList;
+};
+
+const getWonBy = (players: GlobalStore["players"], party: string) =>
+	players.find((p) => p.party === party)?.playerName;
+
+const UsaList: FC = () => {
+	const fiftyStates = useGlobalStore((state) => state.fiftyStates);
+	const players = useGlobalStore((state) => state.players);
+
+	useGlobalStore.subscribe(() => {
+		setSortableStateList(fiftyStates);
+	});
+	const hoveredState = useHoveredState((state) => state.getHoveredStateId());
+	const setHoveredStateId = useHoveredState((state) => state.setHoveredStateId);
+	const [sortableStateList, setSortableStateList] = useState(fiftyStates);
+	const [sortOrder, setSortOrder] = useState<SortOrder>("asc");
+	const [sortColumn, setSortColumn] =
+		useState<keyof WinnableState>("stateName");
+	const sortHeaders = [
+		{ column: "id", label: "Code" },
+		{ column: "stateName", label: "Staat" },
+		{ column: "electoralVotes", label: "Kiesmannen" },
+		{ column: "party", label: "Partij" },
+		{ column: "wonBy", label: "Gewonnen" },
+	] as const;
+
+	const handleClick = (column: keyof WinnableState) => {
+		setSortColumn(column);
+		const sortedList = sortList(sortableStateList, column, sortOrder);
+		setSortOrder(sortOrder === "asc" ? "desc" : "asc");
 		setSortableStateList(sortedList);
 	};
 
 	return (
-		<>
-			<div className="UsaList">
-				<h2 className="state-list-header">Amerika's 50 staten</h2>
-
-				<div className="state-list-sort">
-					<button
-						className="state-list-sort-button"
-						onClick={() => {
-							setSortOrder(sortOrder === "asc" ? "desc" : "asc");
-							setSortableStateList([...sortableStateList].reverse());
-						}}
-						type="button"
-					>
-						{sortOrder === "asc" ? "▲" : "▼"}
-					</button>
-					<button
-						className="state-list-sort-button"
-						style={{ fontWeight: sortColumn === "id" ? "bold" : "normal" }}
-						onClick={() => handleClick("id")}
-						type="button"
-					>
-						Naam
-					</button>
-					<button
-						className="state-list-sort-button"
-						style={{
-							fontWeight: sortColumn === "electoralVotes" ? "bold" : "normal",
-						}}
-						onClick={() => handleClick("electoralVotes")}
-						type="button"
-					>
-						# Kiesmannen
-					</button>
-
-					<button
-						className="state-list-sort-button"
-						style={{ fontWeight: sortColumn === "party" ? "bold" : "normal" }}
-						onClick={() => handleClick("party")}
-						type="button"
-					>
-						Partij
-					</button>
-				</div>
-
-				<div className="state-list">
-					<div className="state-list-item state-list-item-header">Nr.</div>
-					<div className="state-list-item state-list-item-header" />
-					<div className="state-list-item state-list-item-header">Staat</div>
-					<div className="state-list-item state-list-item-header">#</div>
-					<div className="state-list-item state-list-item-header">P</div>
-
-					{sortableStateList.map((state, index) => (
-						<React.Fragment key={state.id}>
-							<div
-								className="state-list-item state-list-item-rank"
-								style={getBackgroundColor(state.id)}
-							>
-								{index + 1}
-							</div>
-							<div
-								className="state-list-item state-list-item-state"
-								style={getBackgroundColor(state.id)}
-							>
-								{state.id}
-							</div>
-							<div
-								className="state-list-item state-list-item-name"
-								style={getBackgroundColor(state.id)}
-							>
-								{state.stateName}
-							</div>
-							<div
-								className="state-list-item state-list-item-electoral-votes"
-								style={getBackgroundColor(state.id)}
-							>
-								{state.electoralVotes}
-							</div>
-							<div
-								className="state-list-item state-list-item-fill"
+		<div className="usalist">
+			<h2 className="state-list-header">De 50 Verenigde Staten van Amerika</h2>
+			<table className="table-container">
+				<thead>
+					<tr className="table-header">
+						{sortHeaders.map(({ column, label }) => (
+							<th scope="col" key={column}>
+								<button
+									className="unstyled-button state-list-sort-button"
+									style={{
+										fontWeight: sortColumn === column ? "bold" : "normal",
+									}}
+									onClick={() => handleClick(column)}
+									type="button"
+								>
+									{label}
+									<span style={{ marginLeft: sortOrder && "10px" }}>
+										{sortColumn === column
+											? sortOrder === "asc"
+												? "↓"
+												: "↑"
+											: ""}
+									</span>
+								</button>
+							</th>
+						))}
+					</tr>
+				</thead>
+				<tbody>
+					{sortableStateList.map((state) => (
+						<tr
+							key={state.id}
+							className={`${
+								state.id === hoveredState ? "hovered-state" : ""
+							} state-list-item`}
+							onMouseEnter={() => setHoveredStateId(state.id)}
+						>
+							<td>{state.id}</td>
+							<td>{state.stateName}</td>
+							<td>{state.electoralVotes}</td>
+							<td
+								className="state-list-item-fill"
 								style={{
-									backgroundColor: state.fill,
-									border:
-										state.id === hoveredState ? " 1px solid #eee" : state.fill,
+									backgroundColor: getPartyColor(state.party),
+									opacity: 0.8,
 								}}
 							/>
-						</React.Fragment>
+							<td className="state-list-item-won-by">
+								{getWonBy(players, state.wonBy)}
+							</td>
+						</tr>
 					))}
-				</div>
-			</div>
-		</>
+				</tbody>
+			</table>
+		</div>
 	);
 };
 

@@ -1,8 +1,7 @@
-.Card {
+.card {
     position: absolute;
-    border: 1px solid #ccc;
+    border: 1px solid var(--background-dark);
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
-    padding: var(--spacing-medium);
-    background: #fff;
+    background: var(--background-white);
 }

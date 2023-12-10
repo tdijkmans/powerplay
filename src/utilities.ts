@@ -1,6 +1,6 @@
-import { Party } from "./data/stateData.interface";
+import { UsaState } from "./data/stateData.interface";
 
-const getPartyColor = (party: Party) => {
+const getPartyColor = (party: UsaState['party']) => {
 	if (party === "republican") {
 		return "#e04b1a";
 	}

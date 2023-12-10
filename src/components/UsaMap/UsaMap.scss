@@ -1,1 +1,23 @@
-.UsaMap {}
+/* YourComponent.css or Styled Component */
+@keyframes dashTravel {
+    0% {
+        stroke-dashoffset: 0;
+    }
+
+    50% {
+        stroke-dashoffset: 50px;
+        /* Adjust this value based on your preference */
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+.hovered-path {
+    stroke: red;
+    stroke-width: 5px;
+    stroke-dasharray: 10px;
+    animation: dashTravel 2s infinite;
+    transition: stroke 0.3s ease;
+}
