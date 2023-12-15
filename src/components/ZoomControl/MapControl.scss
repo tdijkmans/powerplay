@@ -5,27 +5,9 @@
     justify-content: center;
 }
 
-.mapcontrol__header {
-    background: var(--background-paper);
-    border-radius: var(--border-radius);
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
-
-.mapcontrol__title {
-    width: 100%;
-    padding: var(--spacing-xx-small);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: var(--font-size-small);
-}
 
 .mapcontrol__body {
-    padding: var(--spacing-medium);
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -51,4 +33,5 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: var(--spacing-small);
+    margin-left: var(--spacing-medium);
 }

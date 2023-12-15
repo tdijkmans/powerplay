@@ -8,35 +8,36 @@ type GameScoreProps = Record<string, unknown>;
 const GameScore: FC<GameScoreProps> = () => {
 	const players = useGlobalStore((state) => state.players);
 	const [republicanPlayer, democraticPlayer] = players;
-
 	const democratScore = useGlobalStore((state) => state.score.democrat);
 	const grandTotal = useGlobalStore((state) => state.grandTotal);
-	const republicanProgress = useGlobalStore(
-		(state) => state.getRepublicanProgress,
-	);
-	const democratProgress = useGlobalStore((state) => state.getDemocratProgress);
 	const republicanScore = useGlobalStore((state) => state.score.republican);
 
 	const items = [
 		{
-			color: getPartyColor("republican"),
-			label: `Speler 1: ${republicanPlayer?.playerName} | Republikein`,
-			score: `${republicanScore} (${republicanProgress()}%)`,
-		},
-		{
 			color: getPartyColor("democrat"),
-			label: `Speler 2: ${democraticPlayer?.playerName} | Democraat`,
-			score: `${democratScore} (${democratProgress()}%)`,
+			label: `Democraat ${democraticPlayer?.playerName || "Speler 1"}`,
+			scoreText: `${democratScore}/${grandTotal / 2} (${(
+				(democratScore / (grandTotal / 2)) * 100 || 0
+			).toFixed(0)}%)`,
+			score: democratScore,
 		},
 		{
-			color: getPartyColor("swing"),
+			color: "darkgrey",
 			label: "Onbeslist",
-			score: 0,
+			scoreText: `${grandTotal - democratScore - republicanScore}/${grandTotal} (
+				${(
+					((grandTotal - democratScore - republicanScore) / grandTotal) * 100 ||
+					0
+				).toFixed(0)}%)`,
+			score: grandTotal - democratScore - republicanScore,
 		},
 		{
-			color: "black",
-			label: "Totaal",
-			score: grandTotal,
+			color: getPartyColor("republican"),
+			label: `Republikein ${republicanPlayer?.playerName || "Speler 2"}`,
+			scoreText: `${republicanScore}/${grandTotal / 2} (${(
+				(republicanScore / (grandTotal / 2)) * 100 || 0
+			).toFixed(0)}%)`,
+			score: republicanScore,
 		},
 	].map((item) => ({
 		...item,
@@ -44,27 +45,45 @@ const GameScore: FC<GameScoreProps> = () => {
 	}));
 
 	return (
-		<div className="score">
-			<div className="score-header">
-				<span className="material-symbols-outlined">leaderboard</span>
-				<div className="score-header__title">Scorebord</div>
-			</div>
-			{items.map((item) => (
-				<div className="score-item" key={item.key}>
-					<div className="score-item-label">
-						<div
-							style={{
-								width: "20px",
-								height: "20px",
-								backgroundColor: item.color,
-							}}
-						/>
-						<div>{item.label}</div>
-					</div>
-					<div className="score-item-score">{item.score}</div>
+		<>
+			<div className="score">
+				<div className="score-header">
+					<span className="material-symbols-outlined">leaderboard</span>
+					<div className="score-header__title">Scorebord</div>
 				</div>
-			))}
-		</div>
+				{items.map((item) => (
+					<div className="score-item" key={item.key}>
+						<div className="score-item-label">
+							<div
+								style={{
+									width: "20px",
+									height: "20px",
+									backgroundColor: item.color,
+								}}
+							/>
+							<div>{item.label}</div>
+						</div>
+						<div className="score-item-score">{item.scoreText}</div>
+					</div>
+				))}
+			</div>
+
+			<div
+				className="score-row"
+				style={{ display: "flex", alignItems: "center", overflow: "hidden" }}
+			>
+				{items.map((i) => (
+					<div
+						key={`score-row-${i.key}`}
+						style={{
+							width: `${(i.score / grandTotal) * 100}%`,
+							height: "20px",
+							backgroundColor: i.color,
+						}}
+					/>
+				))}
+			</div>
+		</>
 	);
 };
 

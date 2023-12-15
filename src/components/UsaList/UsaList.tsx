@@ -33,8 +33,10 @@ const sortList = (
 	return sortOrder === "desc" ? sortedList.reverse() : sortedList;
 };
 
-const getWonBy = (players: GlobalStore["players"], party: string) =>
-	players.find((p) => p.party === party)?.playerName;
+const getWonBy = (players: GlobalStore["players"], party: string) => {
+	const player = players.find((p) => p.party === party);
+	return player?.playerName || player?.party;
+};
 
 const UsaList: FC = () => {
 	const fiftyStates = useGlobalStore((state) => state.fiftyStates);

@@ -33,7 +33,6 @@ export type WinnableState = UsaState & {
 
 };
 
-
 const statesToWin: WinnableState[] = [...stateData]
 	.sort((a, b) => a.stateName.localeCompare(b.stateName))
 	.map((state) => ({
@@ -43,14 +42,17 @@ const statesToWin: WinnableState[] = [...stateData]
 	}
 	));
 
-const grandTotal =
-	startTotals.republican + startTotals.democrat + startTotals.swing;
+const grandTotal = stateData.reduce((acc, state) => {
+	return acc + state.electoralVotes;
+}
+	, 0);
+
 
 export interface GlobalStore {
 	score: typeof initialScore;
 	grandTotal: number;
-	getRepublicanProgress: () => string;
-	getDemocratProgress: () => string;
+	getRepublicanProgress: () => number;
+	getDemocratProgress: () => number;
 	winAState: (party: UsaState["party"], state: UsaState) => void;
 
 	players: Players;
@@ -120,10 +122,10 @@ const useGlobalStore = create<GlobalStore>((set, get) => ({
 		return get().grandTotal;
 	},
 	getRepublicanProgress: () => {
-		return ((get().score.republican / grandTotal) * 100).toFixed(0);
+		return ((Math.round(get().score.republican / grandTotal)) * 100)
 	},
 	getDemocratProgress: () => {
-		return ((get().score.democrat / grandTotal) * 100).toFixed(0);
+		return ((Math.round(get().score.democrat / grandTotal)) * 100)
 	},
 	winAState: (party, usaState) => {
 		const { electoralVotes } = usaState;
@@ -131,7 +133,6 @@ const useGlobalStore = create<GlobalStore>((set, get) => ({
 			score: {
 				...state.score,
 				[party]: state.score[party] + electoralVotes,
-				swing: state.score.swing - electoralVotes,
 			},
 		}));
 		set((state) => ({
