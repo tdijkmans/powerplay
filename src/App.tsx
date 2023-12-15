@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./App.scss";
 import Card from "./components/Card/Card";
 import GameScore from "./components/GameScore/GameScore";
@@ -8,6 +9,9 @@ import UserForm from "./components/UserForm/UserForm";
 import MapControl from "./components/ZoomControl/MapControl";
 
 function App() {
+	const [showMenu, setShowMenu] = useState(true);
+	const [showMapControl, setShowMapControl] = useState(false);
+
 	return (
 		<>
 			<div className="container">
@@ -18,11 +22,7 @@ function App() {
 				</div>
 				<div className="N">North</div>
 				<div className="NE" />
-				<div className="W">
-					<Card>
-						<UserForm />
-					</Card>
-				</div>
+				<div className="W" />
 				<div className="center-board">
 					<UsaMap />
 				</div>
@@ -32,14 +32,32 @@ function App() {
 					</Card>
 				</div>
 				<div className="SW">
-					<Card>
-						<MapControl />
-					</Card>
+					{showMapControl ? (
+						<MapControl setShowMapControl={setShowMapControl} />
+					) : (
+						<button
+							className="mapcontrol__button"
+							type="button"
+							onClick={() => setShowMapControl(true)}
+						>
+							<span className="material-symbols-outlined">settings</span>
+						</button>
+					)}
 				</div>
 				<div className="S">
 					<UsaStateInfo />
 				</div>
 			</div>
+
+			{showMenu && (
+				<div className="menu-overlay-container">
+					<div className="menu-overlay">
+						<Card>
+							<UserForm setShowMenu={setShowMenu} />
+						</Card>
+					</div>
+				</div>
+			)}
 		</>
 	);
 }

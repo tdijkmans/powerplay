@@ -11,9 +11,11 @@ const MapButton: FC<{ onClick: () => void; icon: string }> = ({
 	</button>
 );
 
-type MapControlProps = Record<string, unknown>;
+type MapControlProps = {
+	setShowMapControl: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-const MapControl: FC<MapControlProps> = () => {
+const MapControl: FC<MapControlProps> = ({ setShowMapControl }) => {
 	const scale = useZoom((state) => state.scale);
 	const setScale = useZoom((state) => state.setScale);
 	const percentageZoom = `${(scale * 100).toFixed(0)}%`;
@@ -24,13 +26,6 @@ const MapControl: FC<MapControlProps> = () => {
 
 	return (
 		<div className="mapcontrol">
-			<div className="mapcontrol__header">
-				<div className="mapcontrol__title">
-					<span className="material-symbols-outlined">map</span>
-					<div className="mapcontrol__zoomlevel">{percentageZoom}</div>
-				</div>
-			</div>
-
 			<div className="mapcontrol__body">
 				<div className="mapcontrol__zoom">
 					<MapButton onClick={() => setScale(scale - 0.1)} icon="zoom_out" />
@@ -54,6 +49,11 @@ const MapControl: FC<MapControlProps> = () => {
 					<div />
 					<MapButton onClick={() => setY(y + 50)} icon="south" />
 					<div />
+				</div>
+				{percentageZoom}
+
+				<div className="mapcontrol__close">
+					<MapButton onClick={() => setShowMapControl(false)} icon="close" />
 				</div>
 			</div>
 		</div>
