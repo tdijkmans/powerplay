@@ -28,6 +28,10 @@
 
 .E {
   grid-area: E;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
 }
 
 .S {
@@ -47,8 +51,17 @@
 
 .SW {
   grid-area: SW;
-  display: flex;
-  align-items: flex-end
+
+
+}
+
+.settings-menu {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 1rem;
+  z-index: 999;
+
 }
 
 .menu-overlay-container {

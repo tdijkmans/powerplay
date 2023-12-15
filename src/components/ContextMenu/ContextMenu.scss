@@ -1,7 +1,8 @@
 .context-menu-container {
-    padding: var(--spacing-small);
+    padding: var(--spacing-large);
     font-family: var(--font-family-body);
     font-size: var(--font-size-small);
+    min-width: 400px;
 }
 
 .overlay {
@@ -20,17 +21,72 @@
     transition: background-color 0.3s ease;
 }
 
-.context-indicator {
-    display: flex;
-    align-items: center;
-    margin-bottom: var(--spacing-x-small);
-    gap: var(--spacing-small);
+.context-menu {
+    &-top {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+    }
 
     &-title {
         font-weight: var(--font-weight-bold);
-        margin: var(--spacing-small);
+    }
+
+    &-body {
+        margin-top: var(--spacing-medium);
+    }
+
+    &-party {
+        font-style: italic;
+    }
+
+    &-close {
+        display: flex;
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+
+        &:hover {
+            color: var(--color-secondary);
+        }
+    }
+
+    &-footer {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-small);
 
     }
+
+    &-button {
+        border: 1px solid var(--color-text);
+        background-color: transparent;
+        cursor: pointer;
+        font-weight: var(--font-weight-bold);
+        font-size: var(--font-size-small);
+        font-family: var(--font-family-body);
+        color: var(--color-text);
+        padding: var(--spacing-small);
+        border-radius: var(--border-radius);
+        transition: background-color 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+            background-color: var(--color-secondary);
+            color: var(--color-white);
+        }
+    }
+}
+
+.context-indicator {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-small);
+
 
     &-republican,
     &-democrat,
@@ -54,5 +110,5 @@
 
 .context-indicator-divider {
     background-color: var(--color-text);
-    margin: var(--spacing-medium);
+    margin: var(--spacing-medium) 0;
 }

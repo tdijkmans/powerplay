@@ -11,11 +11,7 @@ const MapButton: FC<{ onClick: () => void; icon: string }> = ({
 	</button>
 );
 
-type MapControlProps = {
-	setShowMapControl: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-const MapControl: FC<MapControlProps> = ({ setShowMapControl }) => {
+const MapControl: FC = () => {
 	const scale = useZoom((state) => state.scale);
 	const setScale = useZoom((state) => state.setScale);
 	const percentageZoom = `${(scale * 100).toFixed(0)}%`;
@@ -23,6 +19,7 @@ const MapControl: FC<MapControlProps> = ({ setShowMapControl }) => {
 	const y = useZoom((state) => state.translateY);
 	const setX = useZoom((state) => state.setTranslateX);
 	const setY = useZoom((state) => state.setTranslateY);
+	const reset = useZoom((state) => state.reset);
 
 	return (
 		<div className="mapcontrol">
@@ -50,11 +47,8 @@ const MapControl: FC<MapControlProps> = ({ setShowMapControl }) => {
 					<MapButton onClick={() => setY(y + 50)} icon="south" />
 					<div />
 				</div>
-				{percentageZoom}
-
-				<div className="mapcontrol__close">
-					<MapButton onClick={() => setShowMapControl(false)} icon="close" />
-				</div>
+				<span className="mapcontrol__zoom-level">{percentageZoom}</span>
+				<MapButton onClick={reset} icon="refresh" />
 			</div>
 		</div>
 	);

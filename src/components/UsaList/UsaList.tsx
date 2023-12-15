@@ -54,9 +54,9 @@ const UsaList: FC = () => {
 	const sortHeaders = [
 		{ column: "id", label: "Code" },
 		{ column: "stateName", label: "Staat" },
-		{ column: "electoralVotes", label: "Kiesmannen" },
-		{ column: "party", label: "Partij" },
-		{ column: "wonBy", label: "Gewonnen" },
+		{ column: "electoralVotes", label: "KM" },
+		{ column: "party", label: "P" },
+		{ column: "wonBy", label: "Winnaar" },
 	] as const;
 
 	const handleClick = (column: keyof WinnableState) => {
@@ -111,7 +111,7 @@ const UsaList: FC = () => {
 								className="state-list-item-fill"
 								style={{
 									backgroundColor: getPartyColor(state.party),
-									opacity: 0.8,
+									opacity: 0.5,
 								}}
 							/>
 							<td className="state-list-item-won-by">
