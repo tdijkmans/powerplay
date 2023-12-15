@@ -1,5 +1,6 @@
 .usalist {
     padding: var(--spacing-small);
+    width: max-content;
 }
 
 .state-list-header {
@@ -68,7 +69,7 @@
     }
 
     &-won-by {
-        padding-left: var(--spacing-small);
+        padding: 0 var(--spacing-small);
     }
 }
 

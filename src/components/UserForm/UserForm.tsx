@@ -1,12 +1,10 @@
 import React, { FC, useState } from "react";
+import { useMenu } from "../../hooks/useMenu.store";
 import useGlobalStore from "../../stores/useGlobalStore";
 import "./UserForm.scss";
 
-type UserFormProps = {
-	setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-const UserForm: FC<UserFormProps> = ({ setShowMenu }) => {
+const UserForm: FC = () => {
+	const openMenu = useMenu((state) => state.setMenuOpen);
 	const setPlayerNames = useGlobalStore((state) => state.setPlayerNames);
 	const [firstPlayer, setFirstPlayer] = useState("");
 	const [secondPlayer, setSecondPlayer] = useState("");
@@ -26,7 +24,7 @@ const UserForm: FC<UserFormProps> = ({ setShowMenu }) => {
 			democrat: firstPlayer,
 			republican: secondPlayer,
 		});
-		setShowMenu(false);
+		openMenu("userForm", false);
 	};
 
 	return (

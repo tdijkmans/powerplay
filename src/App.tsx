@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./App.scss";
 import Card from "./components/Card/Card";
 import GameScore from "./components/GameScore/GameScore";
@@ -7,13 +6,24 @@ import UsaMap from "./components/UsaMap/UsaMap";
 import UsaStateInfo from "./components/UsaStateInfo/UsaStateInfo";
 import UserForm from "./components/UserForm/UserForm";
 import MapControl from "./components/ZoomControl/MapControl";
+import { useMenu } from "./hooks/useMenu.store";
 
 function App() {
-	const [showMenu, setShowMenu] = useState(true);
-	const [showMapControl, setShowMapControl] = useState(false);
+	const userForm = useMenu((state) => state.getMenu("userForm"));
+	const mapControl = useMenu((state) => state.getMenu("mapControl"));
+	const openMenu = useMenu((state) => state.setMenuOpen);
 
 	return (
 		<>
+			{userForm.open && (
+				<div className="menu-overlay-container">
+					<div className="menu-overlay">
+						<Card>
+							<UserForm />
+						</Card>
+					</div>
+				</div>
+			)}
 			<div className="container">
 				<div className="NW">
 					<Card>
@@ -31,33 +41,32 @@ function App() {
 						<UsaList />
 					</Card>
 				</div>
-				<div className="SW">
-					{showMapControl ? (
-						<MapControl setShowMapControl={setShowMapControl} />
-					) : (
-						<button
-							className="mapcontrol__button"
-							type="button"
-							onClick={() => setShowMapControl(true)}
-						>
-							<span className="material-symbols-outlined">settings</span>
-						</button>
-					)}
-				</div>
+				<div className="SW" />
 				<div className="S">
 					<UsaStateInfo />
 				</div>
 			</div>
 
-			{showMenu && (
-				<div className="menu-overlay-container">
-					<div className="menu-overlay">
-						<Card>
-							<UserForm setShowMenu={setShowMenu} />
-						</Card>
-					</div>
-				</div>
-			)}
+			<div className="settings-menu">
+				{mapControl.open ? (
+					<button
+						className="mapcontrol__button"
+						type="button"
+						onClick={() => openMenu("mapControl", false)}
+					>
+						<span className="material-symbols-outlined">close</span>
+					</button>
+				) : (
+					<button
+						className="mapcontrol__button"
+						type="button"
+						onClick={() => openMenu("mapControl", true)}
+					>
+						<span className="material-symbols-outlined">settings</span>
+					</button>
+				)}
+			</div>
+			{mapControl.open && <MapControl />}
 		</>
 	);
 }

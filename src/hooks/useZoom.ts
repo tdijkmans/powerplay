@@ -8,6 +8,7 @@ interface ZoomStore {
 	translateY: number;
 	setTranslateX: (translateX: number) => void;
 	setTranslateY: (translateY: number) => void;
+	reset: () => void;
 }
 
 export const useZoom = create<ZoomStore>((set, get) => ({
@@ -24,5 +25,6 @@ export const useZoom = create<ZoomStore>((set, get) => ({
 	translateY: 50,
 	setTranslateX: (translateX: number) => set({ translateX }),
 	setTranslateY: (translateY: number) => set({ translateY }),
+	reset: () => set({ scale: 1.9, translateX: 50, translateY: 50 }),
 
 }));

@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
 import { UsaState } from "../../data/stateData.interface";
 import { useHoveredState } from "../../hooks/useHoveredState";
+import { useMenu } from "../../hooks/useMenu.store";
 import { useZoom } from "../../hooks/useZoom";
 import useGlobalStore from "../../stores/useGlobalStore";
 import { getPartyColor } from "../../utilities";
@@ -10,27 +11,25 @@ import "./UsaMap.scss";
 
 const UsaMap: FC = () => {
 	const fiftyStates = useGlobalStore((state) => state.fiftyStates);
-	const [contextMenuVisible, setContextMenuVisible] = useState(false);
-	// const [id, setId] = useState("");
-	const [contextMenuPosition, setContextMenuPosition] = useState({
-		top: 0,
-		left: 0,
-	});
+	const setMenuOpen = useMenu((state) => state.setMenuOpen);
+	const setMenuPosition = useMenu((state) => state.setMenuPosition);
 	const handleMouseEnter = useHoveredState((state) => state.handleMouseEnter);
 	const handleMouseLeave = useHoveredState((state) => state.handleMouseLeave);
 	const hoveredState = useHoveredState((state) => state.hoveredState);
 	const [clickedState, setClickedState] = useState<UsaState>({} as UsaState);
 	const winAState = useGlobalStore((state) => state.winAState);
-	const sortedStates = fiftyStates?.sort((a) =>
-		hoveredState?.id === a.id ? 1 : -1,
-	);
 	const scale = useZoom((state) => state.scale);
 	const handleWheel = useZoom((state) => state.handleWheel);
 	const x = useZoom((state) => state.translateX);
 	const y = useZoom((state) => state.translateY);
+	const sortedStates = fiftyStates?.sort((a) =>
+		hoveredState?.id === a.id ? 1 : -1,
+	);
 
 	const hideContextMenu = () => {
-		setContextMenuVisible(false);
+		setMenuOpen("contextMenu", false);
+		setMenuPosition("contextMenu", 0, 0);
+		setClickedState({} as UsaState);
 	};
 
 	const handleOptionClick = (option: UsaState["party"]) => {
@@ -44,9 +43,8 @@ const UsaMap: FC = () => {
 	) => {
 		e.preventDefault();
 		setClickedState(fiftyStates.find((s) => s.id === state.id) as UsaState);
-		// setId(id);
-		setContextMenuVisible(true);
-		setContextMenuPosition({ top: e.clientY - 250, left: e.clientX - 250 });
+		setMenuOpen("contextMenu", true);
+		setMenuPosition("contextMenu", e.clientX - 250, e.clientY - 250);
 	};
 
 	const handleKeyPress = (
@@ -106,19 +104,20 @@ const UsaMap: FC = () => {
 							x={state?.x}
 							y={state?.y}
 							textAnchor="middle"
-							fontSize="12px"
+							fontSize="10px"
 							fill="white"
-							stroke="white"
-							strokeWidth="1px"
+							strokeWidth="0px"
+							fontFamily="serif"
 						>
-							{state.id}
+							{state.stateName}
 						</text>
 						<text
 							x={state?.x}
 							y={state?.y + 16}
 							textAnchor="middle"
-							fontSize="12px"
-							stroke="white"
+							fontSize="8px"
+							fill="white"
+							strokeWidth="0px"
 						>
 							{state.electoralVotes}
 						</text>
@@ -128,8 +127,6 @@ const UsaMap: FC = () => {
 
 			<ContextMenu
 				state={clickedState}
-				isVisible={contextMenuVisible}
-				position={contextMenuPosition}
 				onOptionClick={handleOptionClick}
 				onHide={hideContextMenu}
 			/>
