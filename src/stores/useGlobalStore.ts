@@ -4,14 +4,6 @@ import { UsaState } from "../data/stateData.interface";
 
 const initialScore = { republican: 0, democrat: 0, swing: 0 };
 
-const startTotals = stateData.reduce(
-	(acc, state) => ({
-		republican: acc.republican + state.electoralVotes,
-		democrat: acc.democrat + state.electoralVotes,
-		swing: acc.swing + state.electoralVotes,
-	}),
-	initialScore,
-);
 
 type Republican = {
 	party: "republican";
