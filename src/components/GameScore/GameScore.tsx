@@ -63,15 +63,15 @@ const GameScore: FC<GameScoreProps> = () => {
 							/>
 							<div>{item.label}</div>
 						</div>
-						<div className="score-item-score">{item.scoreText}</div>
+						<div className="score-item-score">
+							<span className="material-symbols-outlined">groups</span>
+							{item.scoreText}
+						</div>
 					</div>
 				))}
 			</div>
 
-			<div
-				className="score-row"
-				style={{ display: "flex", alignItems: "center", overflow: "hidden" }}
-			>
+			<div className="score-row">
 				{items.map((i) => (
 					<div
 						key={`score-row-${i.key}`}

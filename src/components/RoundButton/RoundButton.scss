@@ -1,0 +1,17 @@
+/* templates/component/RoundButton.scss */
+
+.round-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--spacing-x-large);
+    height: var(--spacing-x-large);
+    border-radius: 50%;
+    background: var(--background-paper);
+
+    &:hover {
+        background: var(--background-paper-hover);
+        cursor: pointer;
+    }
+
+}

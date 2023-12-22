@@ -1,6 +1,5 @@
 .usalist {
     padding: var(--spacing-small);
-    width: max-content;
 }
 
 .state-list-header {
@@ -22,7 +21,6 @@
 
 .state-list-sort-button {
     font-size: var(--font-size-small);
-    font-weight: var(--font-weight-bold);
     font-family: var(--font-family-body);
     color: var(--body-color);
     background: #fff;
@@ -34,26 +32,25 @@
 }
 
 .table-container {
-    width: 100%;
     border-collapse: collapse;
     margin-top: var(--spacing-medium);
+    width: 100%;
 }
+
 
 .table-header,
 .state-list-item {
     text-align: left;
-    color: var(--headline-color);
+    color: var(--body-color);
     font-size: var(--font-size-small);
     font-family: var(--font-family-body);
+
 }
+
 
 .state-list-item {
     padding: var(--spacing-xx-small) 0;
     border-bottom: 1px solid var(--background-paper);
-
-    &:nth-child(odd) {
-        background: var(--background-paper-dark);
-    }
 
     &:hover {
         background: var(--background-paper-highlight);

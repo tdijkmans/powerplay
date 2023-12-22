@@ -1,6 +1,13 @@
+import { useState } from "react";
 import "./App.scss";
 import Card from "./components/Card/Card";
 import GameScore from "./components/GameScore/GameScore";
+import ImpactCardList from "./components/ImpactCardList/ImpactCardList";
+import ImpactCards from "./components/ImpactCards/ImpactCards";
+import MenuButtons from "./components/MenuButtons/MenuButtons";
+import MenuCard from "./components/MenuCard/MenuCard";
+import OneTurn from "./components/OneTurn/OneTurn";
+import PowerPlayLogo from "./components/PowerPlayLogo/PowerPlayLogo";
 import UsaList from "./components/UsaList/UsaList";
 import UsaMap from "./components/UsaMap/UsaMap";
 import UsaStateInfo from "./components/UsaStateInfo/UsaStateInfo";
@@ -9,65 +16,74 @@ import MapControl from "./components/ZoomControl/MapControl";
 import { useMenu } from "./hooks/useMenu.store";
 
 function App() {
+	const tabs = ["states", "cards", "players"];
 	const userForm = useMenu((state) => state.getMenu("userForm"));
-	const mapControl = useMenu((state) => state.getMenu("mapControl"));
-	const openMenu = useMenu((state) => state.setMenuOpen);
+	const [activeTab, setActiveTab] = useState(tabs[0]);
 
 	return (
-		<>
+		<div className="app-container">
 			{userForm.open && (
 				<div className="menu-overlay-container">
 					<div className="menu-overlay">
-						<Card>
-							<UserForm />
-						</Card>
+						{userForm.open && (
+							<MenuCard>
+								<UserForm />
+							</MenuCard>
+						)}
 					</div>
 				</div>
 			)}
-			<div className="container">
-				<div className="NW">
+			<div className="grid-container">
+				<div className="WEST-AREA">
 					<Card>
 						<GameScore />
 					</Card>
+					<Card>
+						<OneTurn />
+					</Card>
+					<ImpactCards />
 				</div>
-				<div className="N">North</div>
-				<div className="NE" />
-				<div className="W" />
-				<div className="center-board">
+
+				<div className="CENTRAL-AREA">
 					<UsaMap />
 				</div>
-				<div className="E">
-					<Card>
-						<UsaList />
-					</Card>
-				</div>
-				<div className="SW" />
-				<div className="S">
-					<UsaStateInfo />
+				<div className="EAST-AREA">
+					<div className="tab-container">
+						<div className="tab-buttons">
+							<button
+								onClick={() => setActiveTab(tabs[0])}
+								type="button"
+								className={activeTab === tabs[0] ? "active" : ""}
+							>
+								Staten
+							</button>
+							<button
+								onClick={() => setActiveTab(tabs[1])}
+								type="button"
+								className={activeTab === tabs[1] ? "active" : ""}
+							>
+								Impactkaarten
+							</button>
+						</div>
+						<div className="tab-content">
+							{activeTab === tabs[0] && <UsaList />}
+							{activeTab === tabs[1] && <ImpactCardList />}
+						</div>
+					</div>
 				</div>
 			</div>
 
-			<div className="settings-menu">
-				{mapControl.open ? (
-					<button
-						className="mapcontrol__button"
-						type="button"
-						onClick={() => openMenu("mapControl", false)}
-					>
-						<span className="material-symbols-outlined">close</span>
-					</button>
-				) : (
-					<button
-						className="mapcontrol__button"
-						type="button"
-						onClick={() => openMenu("mapControl", true)}
-					>
-						<span className="material-symbols-outlined">settings</span>
-					</button>
-				)}
+			<div className="dashboard">
+				<div className="dashboard-left">
+					<MenuButtons />
+					<MapControl />
+				</div>
+				<div className="center-dashboard">
+					<PowerPlayLogo />
+				</div>
+				<UsaStateInfo />
 			</div>
-			{mapControl.open && <MapControl />}
-		</>
+		</div>
 	);
 }
 

@@ -1,8 +1,8 @@
-.card {
+.menu-card {
+    position: absolute;
     border: 1px solid var(--background-dark);
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     background: var(--background-white);
-
-
+    z-index: 1000;
 }

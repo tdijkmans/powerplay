@@ -42,8 +42,9 @@ const UsaList: FC = () => {
 	const fiftyStates = useGlobalStore((state) => state.fiftyStates);
 	const players = useGlobalStore((state) => state.players);
 
-	useGlobalStore.subscribe(() => {
-		setSortableStateList(fiftyStates);
+	useGlobalStore.subscribe(({ fiftyStates }) => {
+		const sortedList = sortList(fiftyStates, sortColumn, sortOrder);
+		setSortableStateList(sortedList);
 	});
 	const hoveredState = useHoveredState((state) => state.getHoveredStateId());
 	const setHoveredStateId = useHoveredState((state) => state.setHoveredStateId);
@@ -109,10 +110,7 @@ const UsaList: FC = () => {
 							<td>{state.electoralVotes}</td>
 							<td
 								className="state-list-item-fill"
-								style={{
-									backgroundColor: getPartyColor(state.party),
-									opacity: 0.5,
-								}}
+								style={{ backgroundColor: getPartyColor(state.party, "light") }}
 							/>
 							<td className="state-list-item-won-by">
 								{getWonBy(players, state.wonBy)}

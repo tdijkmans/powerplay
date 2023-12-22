@@ -51,7 +51,7 @@
 .userform__input:focus {
     outline: none;
     border-color: var(--color-primary);
-    box-shadow: 0 0 5px var(--color-primary)
+    border-width: 1px;
 }
 
 .userform__button {

@@ -1,0 +1,16 @@
+/* templates/component/TemplateName.scss */
+
+.template-name {
+    /* Your block-level styles go here */
+
+    &__title {
+        /* Your element-level styles go here */
+        color: #333;
+    }
+
+    // Example of a modifier class
+    &--modifier {
+        /* Your modifier styles go here */
+        background-color: #f0f0f0;
+    }
+}

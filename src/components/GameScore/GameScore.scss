@@ -24,6 +24,7 @@
     font-family: var(--font-family-body);
     gap: var(--spacing-x-small);
     justify-content: space-between;
+
 }
 
 .score-item-label {
@@ -35,6 +36,16 @@
 .score-item-score {
     font-weight: var(--font-weight-bold);
     margin-left: var(--spacing-small);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-x-small);
+    justify-content: center;
+}
+
+.score-row {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
 }
 
 .score-row::before {
