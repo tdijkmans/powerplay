@@ -2,9 +2,7 @@ import { FC } from "react";
 import useGlobalStore from "../../stores/useGlobalStore";
 import "./OneTurn.scss";
 
-interface OneTurnProps {}
-
-const OneTurn: FC<OneTurnProps> = () => {
+const OneTurn: FC = () => {
 	const democratScore = useGlobalStore((state) => state.score.democrat);
 	const republicanScore = useGlobalStore((state) => state.score.republican);
 

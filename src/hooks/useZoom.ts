@@ -31,6 +31,10 @@ export const useZoom = create<ZoomStore>((set, get) => ({
 	translateY: defaultZoom.translateY,
 	setTranslateX: (translateX: number) => set({ translateX }),
 	setTranslateY: (translateY: number) => set({ translateY }),
-	reset: () => set({ scale: defaultZoom.scale, translateX: defaultZoom.translateX, translateY: defaultZoom.translateY }),
-
+	reset: () =>
+		set({
+			scale: defaultZoom.scale,
+			translateX: defaultZoom.translateX,
+			translateY: defaultZoom.translateY,
+		}),
 }));
