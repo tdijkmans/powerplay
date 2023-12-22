@@ -1,0 +1,84 @@
+/* templates/component/Cheques.scss */
+
+.cheques {
+    &__container {
+        padding: calc(var(--spacing) * 1);
+        background-color: var(--background-paper-dark);
+        border-radius: var(--border-radius);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    &__stack {
+        display: flex;
+        gap: calc(var(--spacing) * 1);
+
+
+    }
+
+    &__legend {
+        margin-top: var(--spacing);
+
+        &__title {
+            font-size: var(--font-size-medium);
+            font-family: var(--font-family-headline);
+            font-weight: var(--font-weight-bold);
+            color: var(--headline-color);
+        }
+
+        &__text {
+            font-size: var(--font-size-small);
+            font-family: var(--font-family-body);
+            color: var(--text-color);
+            margin-top: var(--spacing-small);
+        }
+
+
+    }
+}
+
+.cheque:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: all 0.2s ease-in-out;
+}
+
+.cheque {
+    padding: calc(var(--spacing) * 1);
+    aspect-ratio: 3/2;
+    background-color: white;
+    border: 2px solid var(--color-primary);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-medium);
+    text-align: center;
+
+
+
+
+
+    &__title {
+        font-size: var(--font-size-large);
+        font-family: var(--font-family-headline);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-primary);
+    }
+
+    &__value {
+        margin-top: var(--spacing-small);
+        color: var(--color-primary);
+    }
+
+
+    &__text {
+        font-size: var(--font-size-small);
+        font-family: var(--font-family-headline);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-primary);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+}
