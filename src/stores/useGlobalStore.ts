@@ -4,7 +4,6 @@ import { UsaState } from "../data/stateData.interface";
 
 const initialScore = { republican: 0, democrat: 0, swing: 0 };
 
-
 type Republican = {
 	party: "republican";
 	playerName: string;
@@ -19,10 +18,8 @@ type Democrat = {
 
 type Players = [Republican, Democrat];
 
-
 export type WinnableState = UsaState & {
 	wonBy: "" | "republican" | "democrat" | "swing";
-
 };
 
 const statesToWin: WinnableState[] = [...stateData]
@@ -30,15 +27,11 @@ const statesToWin: WinnableState[] = [...stateData]
 	.map((state) => ({
 		...state,
 		wonBy: "",
-
-	}
-	));
+	}));
 
 const grandTotal = stateData.reduce((acc, state) => {
 	return acc + state.electoralVotes;
-}
-	, 0);
-
+}, 0);
 
 export interface GlobalStore {
 	score: typeof initialScore;
@@ -114,10 +107,10 @@ const useGlobalStore = create<GlobalStore>((set, get) => ({
 		return get().grandTotal;
 	},
 	getRepublicanProgress: () => {
-		return ((Math.round(get().score.republican / grandTotal)) * 100)
+		return Math.round(get().score.republican / grandTotal) * 100;
 	},
 	getDemocratProgress: () => {
-		return ((Math.round(get().score.democrat / grandTotal)) * 100)
+		return Math.round(get().score.democrat / grandTotal) * 100;
 	},
 	winAState: (party, usaState) => {
 		const { electoralVotes } = usaState;
@@ -135,7 +128,6 @@ const useGlobalStore = create<GlobalStore>((set, get) => ({
 
 		console.log("get().score", get().fiftyStates);
 	},
-
 }));
 
 export default useGlobalStore;

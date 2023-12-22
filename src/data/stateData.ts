@@ -1,4 +1,3 @@
-
 export const stateData = [
 	{
 		id: "MA",
@@ -613,5 +612,3 @@ export const stateData = [
 		stateSlogan: "The Last Frontier",
 	},
 ] as const;
-
-
