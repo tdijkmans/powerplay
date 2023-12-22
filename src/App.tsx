@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.scss";
 import Card from "./components/Card/Card";
+import Cheques from "./components/Cheques/Cheques";
 import GameScore from "./components/GameScore/GameScore";
 import ImpactCardList from "./components/ImpactCardList/ImpactCardList";
 import ImpactCards from "./components/ImpactCards/ImpactCards";
@@ -42,6 +43,7 @@ function App() {
 						<OneTurn />
 					</Card>
 					<ImpactCards />
+					<Cheques />
 				</div>
 
 				<div className="CENTRAL-AREA">
