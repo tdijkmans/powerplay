@@ -3,22 +3,10 @@ import "./Card.scss";
 
 interface CardProps {
 	children?: React.ReactNode;
-	isMenu?: boolean;
-	position?: { top: number; left: number };
 }
 
-const Card: FC<CardProps> = ({ children, position, isMenu }) => (
-	<div
-		className="card"
-		style={{
-			top: position?.top,
-			left: position?.left,
-			position: isMenu ? "absolute" : "relative",
-			zIndex: isMenu ? 1000 : 0,
-		}}
-	>
-		{children}
-	</div>
+const Card: FC<CardProps> = ({ children }) => (
+	<div className="card">{children}</div>
 );
 
 export default Card;

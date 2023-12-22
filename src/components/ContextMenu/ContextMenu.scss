@@ -87,6 +87,10 @@
     align-items: center;
     gap: var(--spacing-small);
 
+    &-factor {
+        font-weight: var(--font-weight-regular);
+    }
+
 
     &-republican,
     &-democrat,

@@ -2,25 +2,30 @@ import { FC } from "react";
 import { UsaState } from "../../data/stateData.interface";
 import { useMenu } from "../../hooks/useMenu.store";
 import useGlobalStore, { WinnableState } from "../../stores/useGlobalStore";
-import Card from "../Card/Card";
+import MenuCard from "../MenuCard/MenuCard";
 import "./ContextMenu.scss";
 
-const inUsd = (
+const getConversion = (
 	currentState: WinnableState,
 	party: "democrat" | "republican",
 ) => {
-	const value =
-		((currentState?.wonBy === party && 4) ||
-			(currentState?.party === party && 3) ||
-			((currentState?.wonBy === "" || currentState?.party === "swing") && 2) ||
-			1) *
-		1000000 *
-		(currentState?.electoralVotes || 0);
+	const otherParty = party === "democrat" ? "republican" : "democrat";
+	const factor =
+		(currentState?.wonBy === otherParty && 4) ||
+		(currentState?.party === otherParty && !currentState?.wonBy && 3) ||
+		(!currentState?.wonBy &&
+			currentState?.party !== party &&
+			currentState?.party !== otherParty &&
+			2) ||
+		1;
 
-	return new Intl.NumberFormat("en-US", {
+	const votes = currentState?.electoralVotes || 0;
+	const amount = new Intl.NumberFormat("en-US", {
 		style: "currency",
 		currency: "USD",
-	}).format(value);
+	}).format(factor * votes * 1000000);
+
+	return { amount, factor };
 };
 
 interface ContextMenuProps {
@@ -45,7 +50,7 @@ const ContextMenu: FC<ContextMenuProps> = ({
 	return (
 		<>
 			{isVisible && (
-				<Card position={position} isMenu>
+				<MenuCard position={position}>
 					<div className="context-menu-container">
 						<div className="context-menu-top">
 							<h2 className="context-menu-title">Kies de winnaar van</h2>
@@ -81,7 +86,11 @@ const ContextMenu: FC<ContextMenuProps> = ({
 										<div className={`context-indicator-${player.party}`} />
 										<div>
 											{player.playerName} casht{" "}
-											{inUsd(currentState, player.party)}
+											{getConversion(currentState, player.party).amount}
+
+											{` (${
+												getConversion(currentState, player.party).factor
+											}x)`}
 										</div>
 									</div>
 								</button>
@@ -99,7 +108,7 @@ const ContextMenu: FC<ContextMenuProps> = ({
 							</button>
 						</div>
 					</div>
-				</Card>
+				</MenuCard>
 			)}
 
 			<div

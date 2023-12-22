@@ -1,9 +1,16 @@
-.usa-stateinfo {
+.usa-stateinfo__icon {
+    width: 20px;
+    height: 20px;
+    transition: all 0.2s ease-in-out;
+}
+
+.usa-stateinfo-container {
+    width: calc(var(--spacing) * 24);
     margin-top: var(--spacing-medium);
     margin-bottom: var(--spacing-xx-small);
     font-size: var(--font-size-small);
     font-family: var(--font-family-body);
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: var(--spacing-small);
 }

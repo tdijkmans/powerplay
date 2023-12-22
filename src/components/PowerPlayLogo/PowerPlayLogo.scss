@@ -1,0 +1,9 @@
+.powerplay-logo {
+    transform: translateY(-15%) scale(0.9);
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        transform: translateY(-15%) scale(1);
+
+    }
+}

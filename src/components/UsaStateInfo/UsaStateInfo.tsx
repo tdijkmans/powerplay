@@ -10,34 +10,26 @@ const UsaStateInfo: FC<UsaStateInfoProps> = () => {
 	const hoveredState = useHoveredState((state) => state.hoveredState);
 	const fiftyStates = useGlobalStore((state) => state.fiftyStates);
 	const focusedState = fiftyStates.find((s) => s.id === hoveredState.id);
+	const { stateSlogan, stateName, electoralVotes, party } = hoveredState;
+
 	return (
-		<>
-			{!hoveredState.electoralVotes ? (
-				<div className="usa-stateinfo">
+		<div className="usa-stateinfo-container">
+			{!electoralVotes ? (
+				<>
 					<div
-						style={{
-							width: "20px",
-							height: "20px",
-							backgroundColor: "#fff",
-						}}
+						className="usa-stateinfo__icon"
+						style={{ backgroundColor: "#fff" }}
 					/>
-					<p>
-						Klik op een staat om de kiesmannen te zien die in die staat te
-						verdelen zijn.
-					</p>
-				</div>
+					<p>Bekijk een staat voor meer informatie.</p>
+				</>
 			) : (
-				<div className="usa-stateinfo">
+				<>
 					<div
-						style={{
-							width: "20px",
-							height: "20px",
-							backgroundColor: getPartyColor(hoveredState.party),
-						}}
+						className="usa-stateinfo__icon"
+						style={{ backgroundColor: getPartyColor(party) }}
 					/>
 					<p>
-						{hoveredState.stateSlogan} - {hoveredState.stateName} -{" "}
-						{hoveredState.electoralVotes} kiesmannen
+						{stateSlogan} - {stateName} - {electoralVotes} kiesmannen
 						{(focusedState?.wonBy && (
 							<>
 								<br />
@@ -56,9 +48,9 @@ const UsaStateInfo: FC<UsaStateInfoProps> = () => {
 							</>
 						)}
 					</p>
-				</div>
+				</>
 			)}
-		</>
+		</div>
 	);
 };
 

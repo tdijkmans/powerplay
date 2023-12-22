@@ -11,8 +11,14 @@ interface ZoomStore {
 	reset: () => void;
 }
 
-export const useZoom = create<ZoomStore>((set, get) => ({
+const defaultZoom = {
 	scale: 1.9,
+	translateX: 120,
+	translateY: 150,
+};
+
+export const useZoom = create<ZoomStore>((set, get) => ({
+	scale: defaultZoom.scale,
 	handleWheel: (e: React.WheelEvent<SVGSVGElement>) => {
 		if (e.deltaY < 0) {
 			set({ scale: get().scale + 0.1 });
@@ -21,10 +27,10 @@ export const useZoom = create<ZoomStore>((set, get) => ({
 		}
 	},
 	setScale: (scale: number) => set({ scale }),
-	translateX: 50,
-	translateY: 50,
+	translateX: defaultZoom.translateX,
+	translateY: defaultZoom.translateY,
 	setTranslateX: (translateX: number) => set({ translateX }),
 	setTranslateY: (translateY: number) => set({ translateY }),
-	reset: () => set({ scale: 1.9, translateX: 50, translateY: 50 }),
+	reset: () => set({ scale: defaultZoom.scale, translateX: defaultZoom.translateX, translateY: defaultZoom.translateY }),
 
 }));

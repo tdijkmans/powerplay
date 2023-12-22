@@ -1,15 +1,7 @@
 import { FC } from "react";
 import { useZoom } from "../../hooks/useZoom";
+import RoundButton from "../RoundButton/RoundButton";
 import "./MapControl.scss";
-
-const MapButton: FC<{ onClick: () => void; icon: string }> = ({
-	onClick,
-	icon,
-}) => (
-	<button className="mapcontrol__button" type="button" onClick={onClick}>
-		<span className="material-symbols-outlined">{icon}</span>
-	</button>
-);
 
 const MapControl: FC = () => {
 	const scale = useZoom((state) => state.scale);
@@ -23,33 +15,23 @@ const MapControl: FC = () => {
 
 	return (
 		<div className="mapcontrol">
-			<div className="mapcontrol__body">
-				<div className="mapcontrol__zoom">
-					<MapButton onClick={() => setScale(scale - 0.1)} icon="zoom_out" />
-					<MapButton onClick={() => setScale(1)} icon="search" />
-					<MapButton onClick={() => setScale(scale + 0.1)} icon="zoom_in" />
-				</div>
+			<RoundButton onClick={() => setScale(scale - 0.1)} icon="zoom_out" />
+			<RoundButton onClick={() => setScale(1)} icon="search" />
+			<RoundButton onClick={() => setScale(scale + 0.1)} icon="zoom_in" />
 
-				<div className="mapcontrol__coordinates">
-					<div />
-					<MapButton onClick={() => setY(y - 50)} icon="north" />
-					<div />
-					<MapButton onClick={() => setX(x - 50)} icon="west" />
-					<MapButton
-						onClick={() => {
-							setY(0);
-							setX(0);
-						}}
-						icon="center_focus_strong"
-					/>
-					<MapButton onClick={() => setX(x + 50)} icon="east" />
-					<div />
-					<MapButton onClick={() => setY(y + 50)} icon="south" />
-					<div />
-				</div>
-				<span className="mapcontrol__zoom-level">{percentageZoom}</span>
-				<MapButton onClick={reset} icon="refresh" />
-			</div>
+			<RoundButton onClick={() => setY(y - 50)} icon="north" />
+			<RoundButton onClick={() => setX(x - 50)} icon="west" />
+			<RoundButton
+				onClick={() => {
+					setY(0);
+					setX(0);
+				}}
+				icon="center_focus_strong"
+			/>
+			<RoundButton onClick={() => setX(x + 50)} icon="east" />
+			<RoundButton onClick={() => setY(y + 50)} icon="south" />
+			<span className="mapcontrol__zoom-level">{percentageZoom}</span>
+			<RoundButton onClick={reset} icon="refresh" />
 		</div>
 	);
 };

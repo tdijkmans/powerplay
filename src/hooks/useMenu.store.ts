@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-const menuIds = ["contextMenu", "userForm", "mapControl"] as const;
+const menuIds = ["contextMenu", "userForm", "mapControl", 'impactCardList'] as const;
 
 interface MenuStore {
     menus: {
@@ -42,8 +42,9 @@ const initalMenuState = menuIds.reduce(
 )
 
 export const useMenu = create<MenuStore>((set, get) => ({
-    menus: { ...initalMenuState, userForm: { open: true, left: 0, top: 0 } },
+    menus: { ...initalMenuState, userForm: { open: false, left: 0, top: 0 }, impactCardList: { open: false, left: 0, top: 0 } },
     setMenu: (menuId, open, left, top) => {
+
         set((state) => ({
             menus: {
                 ...state.menus,

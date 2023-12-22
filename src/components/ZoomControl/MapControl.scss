@@ -1,40 +1,12 @@
 .mapcontrol {
-    z-index: 999;
-}
-
-
-
-.mapcontrol__body {
-    width: max-content;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.mapcontrol__button {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: var(--spacing-x-large);
-    height: var(--spacing-x-large);
-    border-radius: 50%;
-    background: var(--background-paper);
-
-    &:hover {
-        background: var(--background-paper-hover);
-    }
-}
-
-.mapcontrol__zoom,
-.mapcontrol__coordinates {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
     gap: var(--spacing-small);
-    margin-left: var(--spacing-medium);
 }
 
 .mapcontrol__zoom-level {
-
-    margin: 0 var(--spacing-small);
-
+    font-size: var(--font-size-small);
+    font-family: var(--font-family-body);
+    color: var(--text-color);
+    font-weight: var(--font-weight-bold);
 }

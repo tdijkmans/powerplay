@@ -1,0 +1,15 @@
+/* templates/component/MenuButtons.scss */
+
+.menu-buttons {
+    display: flex;
+    gap: var(--spacing);
+}
+
+.menu-button {
+    background: var(--background-paper);
+    border: var(--background-paper-dark) 1px solid;
+    border-radius: var(--border-radius);
+    color: var(--color-text);
+    cursor: pointer;
+    padding: var(--spacing);
+}
