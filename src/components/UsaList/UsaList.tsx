@@ -1,14 +1,12 @@
 import { FC, useState } from "react";
-import {
-	GlobalStore,
-	WinnableState,
-	useGlobal,
-} from "../../stores/useGlobal.store";
+import { GlobalStore } from "../../stores/useGlobal.interface";
+import { useGlobal } from "../../stores/useGlobal.store";
 import { useHovered } from "../../stores/useHovered.store";
 import { getPartyColor } from "../../utilities";
 import "./UsaList.scss";
 
 type SortOrder = "asc" | "desc";
+type WinnableState = GlobalStore["fiftyStates"][0];
 
 const sortList = (
 	list: WinnableState[],

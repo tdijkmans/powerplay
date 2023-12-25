@@ -1,12 +1,13 @@
 import { FC } from "react";
 import { UsaState } from "../../data/stateData.interface";
-import { WinnableState, useGlobal } from "../../stores/useGlobal.store";
+import { GlobalStore } from "../../stores/useGlobal.interface";
+import { useGlobal } from "../../stores/useGlobal.store";
 import { useMenu } from "../../stores/useMenu.store";
 import MenuCard from "../MenuCard/MenuCard";
 import "./ContextMenu.scss";
 
 const getConversion = (
-	currentState: WinnableState,
+	currentState: GlobalStore["fiftyStates"][0] | undefined,
 	party: "democrat" | "republican",
 ) => {
 	const otherParty = party === "democrat" ? "republican" : "democrat";
@@ -41,9 +42,7 @@ const ContextMenu: FC<ContextMenuProps> = ({
 }) => {
 	const players = useGlobal((state) => state.players);
 	const fiftyStates = useGlobal((state) => state.fiftyStates);
-	const currentState = fiftyStates.find(
-		(s) => s.id === state.id,
-	) as WinnableState;
+	const currentState = fiftyStates.find((s) => s.id === state.id);
 	const isVisible = useMenu((state) => state.getMenu("contextMenu")).open;
 	const position = useMenu((state) => state.getMenuPosition("contextMenu"));
 

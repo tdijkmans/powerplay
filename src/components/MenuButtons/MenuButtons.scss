@@ -3,6 +3,14 @@
 .menu-buttons {
     display: flex;
     gap: var(--spacing);
+
+    &__spacer {
+        border: var(--background-paper-dark) 1px solid;
+    }
+
+
+
+
 }
 
 .menu-button {

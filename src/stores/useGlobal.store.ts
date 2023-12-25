@@ -1,10 +1,9 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { stateData } from "../data/stateData";
-import { UsaState } from "../data/stateData.interface";
+import { GlobalStore } from "./useGlobal.interface";
 
-const initialScore = { republican: 0, democrat: 0, swing: 0 };
-const statesToWin: WinnableState[] = [...stateData]
+const fiftyStates: GlobalStore["fiftyStates"] = [...stateData]
 	.sort((a, b) => a.stateName.localeCompare(b.stateName))
 	.map((state) => ({
 		...state,
@@ -32,7 +31,7 @@ export const useGlobal = create<GlobalStore>()(
 					score: 0,
 				},
 			],
-			fiftyStates: statesToWin,
+			fiftyStates,
 			setPlayers: (players) => {
 				set((state) => ({
 					players: [
@@ -62,11 +61,15 @@ export const useGlobal = create<GlobalStore>()(
 				}));
 			},
 
-			score: initialScore,
+			score: {
+				democrat: 0,
+				republican: 0,
+				swing: 0,
+			},
 			getScore: () => {
 				return get().score;
 			},
-			grandTotal: grandTotal,
+			grandTotal,
 			getGrandTotal: () => {
 				return get().grandTotal;
 			},
@@ -90,47 +93,12 @@ export const useGlobal = create<GlobalStore>()(
 					),
 				}));
 			},
+			clearPersistedStore: () => {
+				localStorage.removeItem("global-store");
+			},
 		}),
 		{
 			name: "global-store",
 		},
 	),
 );
-
-type Republican = {
-	party: "republican";
-	playerName: string;
-	score: number;
-};
-
-type Democrat = {
-	party: "democrat";
-	playerName: string;
-	score: number;
-};
-
-type Players = [Republican, Democrat];
-
-export type WinnableState = UsaState & {
-	wonBy: "" | "republican" | "democrat" | "swing";
-};
-
-export interface GlobalStore {
-	score: typeof initialScore;
-	grandTotal: number;
-	getRepublicanProgress: () => number;
-	getDemocratProgress: () => number;
-	winAState: (party: UsaState["party"], state: UsaState) => void;
-
-	players: Players;
-	setPlayerNames: (players: {
-		republican: string;
-		democrat: string;
-	}) => void;
-
-	setPlayers: (players: {
-		republican: string;
-		democrat: string;
-	}) => void;
-	fiftyStates: WinnableState[];
-}
