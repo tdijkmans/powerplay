@@ -3,7 +3,6 @@
     font-weight: var(--font-weight-bold);
     font-family: var(--font-family-headline);
     color: var(--headline-color);
-    margin: var(--spacing-x-small) 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,13 +19,12 @@
 
 .oneturn-item {
     display: flex;
+    height: calc(var(--spacing) * 3);
     font-size: var(--font-size-small);
     font-family: var(--font-family-body);
-    width: 100%;
     justify-content: center;
     align-items: center;
     gap: var(--spacing-small);
-    min-height: calc(var(--spacing-large) * 3);
     border-bottom: 1px solid var(--background-paper);
 
     // uppper only upper left and upper right corners are rounded
@@ -37,13 +35,12 @@
 
     // lower only lower left and lower right corners are rounded
     &:last-child {
-        border-bottom-left-radius: var(--border-radius);
-        border-bottom-right-radius: var(--border-radius);
+        border-bottom: none;
     }
 
     &__subitem {
         border-radius: 50%;
-        width: calc(var(--spacing-large) * 2);
+        width: calc(var(--spacing) * 2);
         aspect-ratio: 1;
         background: var(--color-white);
         display: flex;
@@ -59,17 +56,16 @@
         align-items: center;
         background: var(--background-paper-light);
         border-radius: 50%;
-        width: calc(var(--spacing-large) * 2);
+        width: calc(var(--spacing) * 2);
         aspect-ratio: 1;
+        color: var(--color-white);
 
         &--rep {
             background: var(--color-republican);
-            color: var(--color-white);
         }
 
         &--dem {
             background: var(--color-democrat);
-            color: var(--color-white);
         }
     }
 

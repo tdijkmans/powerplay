@@ -1,12 +1,12 @@
 // templates/component/ImpactCardList.tsx
 
+import { impactCards } from "../../data/impactCards";
 import "./ImpactCardList.scss"; // Import your SCSS file
-import { impactCards } from "./ImpactCards";
 
 function ImpactCardList() {
 	return (
 		<div className="impact-card-list-container">
-			<div className="impact-card-list__title">Impact kaarten</div>
+			<div className="impact-card-list__title">Impactkaarten</div>
 
 			<div className="impact-card-list">
 				{impactCards.map((card) => (
