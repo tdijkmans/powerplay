@@ -1,6 +1,6 @@
 // templates/component/MenuButtons.tsx
 
-import { useMenu } from "../../hooks/useMenu.store";
+import { useMenu } from "../../stores/useMenu.store";
 import RoundButton from "../RoundButton/RoundButton";
 import "./MenuButtons.scss"; // Import your SCSS file
 

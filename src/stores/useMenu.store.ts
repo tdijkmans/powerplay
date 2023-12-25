@@ -7,37 +7,6 @@ const menuIds = [
 	"impactCardList",
 ] as const;
 
-interface MenuStore {
-	menus: {
-		[key in (typeof menuIds)[number]]: {
-			open: boolean;
-			left: number;
-			top: number;
-		};
-	};
-	setMenu: (
-		menuId: (typeof menuIds)[number],
-		open: boolean,
-		left: number,
-		top: number,
-	) => void;
-	setMenuOpen: (menuId: (typeof menuIds)[number], open: boolean) => void;
-	setMenuPosition: (
-		menuId: (typeof menuIds)[number],
-		left: number,
-		top: number,
-	) => void;
-	getMenu: (menuId: (typeof menuIds)[number]) => {
-		open: boolean;
-		left: number;
-		top: number;
-	};
-	getMenuPosition: (menuId: (typeof menuIds)[number]) => {
-		left: number;
-		top: number;
-	};
-}
-
 const initalMenuState = menuIds.reduce(
 	(acc, menuId) => {
 		acc[menuId] = { open: false, left: 0, top: 0 };
@@ -95,3 +64,34 @@ export const useMenu = create<MenuStore>((set, get) => ({
 		return { left, top };
 	},
 }));
+
+interface MenuStore {
+	menus: {
+		[key in (typeof menuIds)[number]]: {
+			open: boolean;
+			left: number;
+			top: number;
+		};
+	};
+	setMenu: (
+		menuId: (typeof menuIds)[number],
+		open: boolean,
+		left: number,
+		top: number,
+	) => void;
+	setMenuOpen: (menuId: (typeof menuIds)[number], open: boolean) => void;
+	setMenuPosition: (
+		menuId: (typeof menuIds)[number],
+		left: number,
+		top: number,
+	) => void;
+	getMenu: (menuId: (typeof menuIds)[number]) => {
+		open: boolean;
+		left: number;
+		top: number;
+	};
+	getMenuPosition: (menuId: (typeof menuIds)[number]) => {
+		left: number;
+		top: number;
+	};
+}

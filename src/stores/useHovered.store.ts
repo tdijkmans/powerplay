@@ -2,16 +2,7 @@ import { create } from "zustand";
 import { stateData } from "../data/stateData";
 import { UsaState } from "../data/stateData.interface";
 
-interface HoveredStateStore {
-	hoveredState: UsaState;
-	setHoveredState: (state: UsaState) => void;
-	handleMouseEnter: (e: React.MouseEvent<SVGPathElement, MouseEvent>) => void;
-	handleMouseLeave: (e: React.MouseEvent<SVGPathElement, MouseEvent>) => void;
-	getHoveredStateId: () => UsaState["id"];
-	setHoveredStateId: (id: UsaState["id"]) => void;
-}
-
-export const useHoveredState = create<HoveredStateStore>((set, get) => ({
+export const useHovered = create<HoveredStateStore>((set, get) => ({
 	hoveredState: {} as UsaState,
 	setHoveredState: (state) => set({ hoveredState: state }),
 	setHoveredStateId: (id) => {
@@ -34,3 +25,12 @@ export const useHoveredState = create<HoveredStateStore>((set, get) => ({
 		return get().hoveredState.id;
 	},
 }));
+
+interface HoveredStateStore {
+	hoveredState: UsaState;
+	setHoveredState: (state: UsaState) => void;
+	handleMouseEnter: (e: React.MouseEvent<SVGPathElement, MouseEvent>) => void;
+	handleMouseLeave: (e: React.MouseEvent<SVGPathElement, MouseEvent>) => void;
+	getHoveredStateId: () => UsaState["id"];
+	setHoveredStateId: (id: UsaState["id"]) => void;
+}

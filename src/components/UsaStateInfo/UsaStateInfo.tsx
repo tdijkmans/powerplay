@@ -1,14 +1,14 @@
 import { FC } from "react";
-import { useHoveredState } from "../../hooks/useHoveredState";
-import useGlobalStore from "../../stores/useGlobalStore";
+import { useGlobal } from "../../stores/useGlobal.store";
+import { useHovered } from "../../stores/useHovered.store";
 import { getPartyColor } from "../../utilities";
 import "./UsaStateInfo.scss";
 
 type UsaStateInfoProps = Record<string, unknown>;
 
 const UsaStateInfo: FC<UsaStateInfoProps> = () => {
-	const hoveredState = useHoveredState((state) => state.hoveredState);
-	const fiftyStates = useGlobalStore((state) => state.fiftyStates);
+	const hoveredState = useHovered((state) => state.hoveredState);
+	const fiftyStates = useGlobal((state) => state.fiftyStates);
 	const focusedState = fiftyStates.find((s) => s.id === hoveredState.id);
 	const { stateSlogan, stateName, electoralVotes, party } = hoveredState;
 

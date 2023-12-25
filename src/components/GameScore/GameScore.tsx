@@ -1,16 +1,16 @@
 import { FC } from "react";
-import useGlobalStore from "../../stores/useGlobalStore";
+import { useGlobal } from "../../stores/useGlobal.store";
 import { getPartyColor } from "../../utilities";
 import "./GameScore.scss";
 
 type GameScoreProps = Record<string, unknown>;
 
 const GameScore: FC<GameScoreProps> = () => {
-	const players = useGlobalStore((state) => state.players);
+	const players = useGlobal((state) => state.players);
 	const [republicanPlayer, democraticPlayer] = players;
-	const democratScore = useGlobalStore((state) => state.score.democrat);
-	const grandTotal = useGlobalStore((state) => state.grandTotal);
-	const republicanScore = useGlobalStore((state) => state.score.republican);
+	const democratScore = useGlobal((state) => state.score.democrat);
+	const grandTotal = useGlobal((state) => state.grandTotal);
+	const republicanScore = useGlobal((state) => state.score.republican);
 
 	const items = [
 		{

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { useZoom } from "../../hooks/useZoom";
+import { useZoom } from "../../stores/useZoom.store";
 import RoundButton from "../RoundButton/RoundButton";
 import "./MapControl.scss";
 
