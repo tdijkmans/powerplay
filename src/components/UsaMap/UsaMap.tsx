@@ -1,23 +1,23 @@
 import React, { FC, useState } from "react";
 import { UsaState } from "../../data/stateData.interface";
-import { useHoveredState } from "../../hooks/useHoveredState";
-import { useMenu } from "../../hooks/useMenu.store";
-import { useZoom } from "../../hooks/useZoom";
-import useGlobalStore from "../../stores/useGlobalStore";
+import { useGlobal } from "../../stores/useGlobal.store";
+import { useHovered } from "../../stores/useHovered.store";
+import { useMenu } from "../../stores/useMenu.store";
+import { useZoom } from "../../stores/useZoom.store";
 import { getPartyColor } from "../../utilities";
 import ContextMenu from "../ContextMenu/ContextMenu";
 import MapContours from "./MapContours";
 import "./UsaMap.scss";
 
 const UsaMap: FC = () => {
-	const fiftyStates = useGlobalStore((state) => state.fiftyStates);
+	const fiftyStates = useGlobal((state) => state.fiftyStates);
 	const setMenuOpen = useMenu((state) => state.setMenuOpen);
 	const setMenuPosition = useMenu((state) => state.setMenuPosition);
-	const handleMouseEnter = useHoveredState((state) => state.handleMouseEnter);
-	const handleMouseLeave = useHoveredState((state) => state.handleMouseLeave);
-	const hoveredState = useHoveredState((state) => state.hoveredState);
+	const handleMouseEnter = useHovered((state) => state.handleMouseEnter);
+	const handleMouseLeave = useHovered((state) => state.handleMouseLeave);
+	const hoveredState = useHovered((state) => state.hoveredState);
 	const [clickedState, setClickedState] = useState<UsaState>({} as UsaState);
-	const winAState = useGlobalStore((state) => state.winAState);
+	const winAState = useGlobal((state) => state.winAState);
 	const scale = useZoom((state) => state.scale);
 	const handleWheel = useZoom((state) => state.handleWheel);
 	const x = useZoom((state) => state.translateX);

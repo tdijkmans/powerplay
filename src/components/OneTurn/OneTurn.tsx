@@ -1,10 +1,10 @@
 import { FC } from "react";
-import useGlobalStore from "../../stores/useGlobalStore";
+import { useGlobal } from "../../stores/useGlobal.store";
 import "./OneTurn.scss";
 
 const OneTurn: FC = () => {
-	const democratScore = useGlobalStore((state) => state.score.democrat);
-	const republicanScore = useGlobalStore((state) => state.score.republican);
+	const democratScore = useGlobal((state) => state.score.democrat);
+	const republicanScore = useGlobal((state) => state.score.republican);
 
 	// Game rules:
 	// - Each party starts with 3 fundraising power

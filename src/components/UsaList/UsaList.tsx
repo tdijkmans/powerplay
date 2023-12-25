@@ -1,9 +1,10 @@
 import { FC, useState } from "react";
-import { useHoveredState } from "../../hooks/useHoveredState";
-import useGlobalStore, {
+import {
 	GlobalStore,
 	WinnableState,
-} from "../../stores/useGlobalStore";
+	useGlobal,
+} from "../../stores/useGlobal.store";
+import { useHovered } from "../../stores/useHovered.store";
 import { getPartyColor } from "../../utilities";
 import "./UsaList.scss";
 
@@ -39,15 +40,15 @@ const getWonBy = (players: GlobalStore["players"], party: string) => {
 };
 
 const UsaList: FC = () => {
-	const fiftyStates = useGlobalStore((state) => state.fiftyStates);
-	const players = useGlobalStore((state) => state.players);
+	const fiftyStates = useGlobal((state) => state.fiftyStates);
+	const players = useGlobal((state) => state.players);
 
-	useGlobalStore.subscribe(({ fiftyStates }) => {
+	useGlobal.subscribe(({ fiftyStates }) => {
 		const sortedList = sortList(fiftyStates, sortColumn, sortOrder);
 		setSortableStateList(sortedList);
 	});
-	const hoveredState = useHoveredState((state) => state.getHoveredStateId());
-	const setHoveredStateId = useHoveredState((state) => state.setHoveredStateId);
+	const hoveredState = useHovered((state) => state.getHoveredStateId());
+	const setHoveredStateId = useHovered((state) => state.setHoveredStateId);
 	const [sortableStateList, setSortableStateList] = useState(fiftyStates);
 	const [sortOrder, setSortOrder] = useState<SortOrder>("asc");
 	const [sortColumn, setSortColumn] =

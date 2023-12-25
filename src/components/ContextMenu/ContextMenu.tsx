@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { UsaState } from "../../data/stateData.interface";
-import { useMenu } from "../../hooks/useMenu.store";
-import useGlobalStore, { WinnableState } from "../../stores/useGlobalStore";
+import { WinnableState, useGlobal } from "../../stores/useGlobal.store";
+import { useMenu } from "../../stores/useMenu.store";
 import MenuCard from "../MenuCard/MenuCard";
 import "./ContextMenu.scss";
 
@@ -39,8 +39,8 @@ const ContextMenu: FC<ContextMenuProps> = ({
 	onHide,
 	state,
 }) => {
-	const players = useGlobalStore((state) => state.players);
-	const fiftyStates = useGlobalStore((state) => state.fiftyStates);
+	const players = useGlobal((state) => state.players);
+	const fiftyStates = useGlobal((state) => state.fiftyStates);
 	const currentState = fiftyStates.find(
 		(s) => s.id === state.id,
 	) as WinnableState;

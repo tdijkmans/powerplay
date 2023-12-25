@@ -14,7 +14,7 @@ import UsaMap from "./components/UsaMap/UsaMap";
 import UsaStateInfo from "./components/UsaStateInfo/UsaStateInfo";
 import UserForm from "./components/UserForm/UserForm";
 import MapControl from "./components/ZoomControl/MapControl";
-import { useMenu } from "./hooks/useMenu.store";
+import { useMenu } from "./stores/useMenu.store";
 
 function App() {
 	const tabs = ["states", "cards", "players"];
