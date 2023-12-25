@@ -13,7 +13,6 @@ import UsaList from "./components/UsaList/UsaList";
 import UsaMap from "./components/UsaMap/UsaMap";
 import UsaStateInfo from "./components/UsaStateInfo/UsaStateInfo";
 import UserForm from "./components/UserForm/UserForm";
-import MapControl from "./components/ZoomControl/MapControl";
 import { useMenu } from "./stores/useMenu.store";
 
 function App() {
@@ -78,7 +77,6 @@ function App() {
 			<div className="dashboard">
 				<div className="dashboard-left">
 					<MenuButtons />
-					<MapControl />
 				</div>
 				<div className="center-dashboard">
 					<PowerPlayLogo />

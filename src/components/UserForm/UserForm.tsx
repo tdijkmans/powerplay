@@ -2,7 +2,6 @@ import React, { FC, useState } from "react";
 import { useGlobal } from "../../stores/useGlobal.store";
 import { useMenu } from "../../stores/useMenu.store";
 
-import { usePersistedGlobal } from "../../stores/usePersisted.store";
 import "./UserForm.scss";
 
 const UserForm: FC = () => {
@@ -10,8 +9,6 @@ const UserForm: FC = () => {
 	const setPlayerNames = useGlobal((state) => state.setPlayerNames);
 	const [firstPlayer, setFirstPlayer] = useState("");
 	const [secondPlayer, setSecondPlayer] = useState("");
-	const useBounds = usePersistedGlobal((state) => state);
-	console.log(useBounds);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { value, id } = e.currentTarget;
