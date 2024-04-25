@@ -21,29 +21,6 @@ export const useMenu = create<MenuStore>((set, get) => ({
 		userForm: { open: false, left: 0, top: 0 },
 		impactCardList: { open: false, left: 0, top: 0 },
 	},
-	setMenu: (menuId, open, left, top) => {
-		set((state) => ({
-			menus: {
-				...state.menus,
-				[menuId]: {
-					open,
-					left,
-					top,
-				},
-			},
-		}));
-	},
-	setMenuOpen: (menuId, open) => {
-		set((state) => ({
-			menus: {
-				...state.menus,
-				[menuId]: {
-					...state.menus[menuId],
-					open,
-				},
-			},
-		}));
-	},
 	setMenuPosition: (menuId, left, top) => {
 		set((state) => ({
 			menus: {
@@ -59,9 +36,36 @@ export const useMenu = create<MenuStore>((set, get) => ({
 	getMenu: (menuId) => {
 		return get().menus[menuId];
 	},
-	getMenuPosition: (menuId) => {
-		const { left, top } = get().menus[menuId];
-		return { left, top };
+	closeMenu: (menuId) => {
+		set((state) => ({
+			menus: {
+				...state.menus,
+				[menuId]: {
+					...state.menus[menuId],
+					open: false,
+				},
+			},
+		}));
+	},
+	openMenu: (menuId) => {
+		// close all other menus
+		const idsToClose = Object.keys(get().menus).filter((id) => id !== menuId) as (
+			| typeof menuIds[number]
+		)[];
+		for (const id of idsToClose) {
+			if (id !== menuId) {
+				get().closeMenu(id);
+			}
+		}
+		set((state) => ({
+			menus: {
+				...state.menus,
+				[menuId]: {
+					...state.menus[menuId],
+					open: true,
+				},
+			},
+		}));
 	},
 }));
 
@@ -73,13 +77,6 @@ interface MenuStore {
 			top: number;
 		};
 	};
-	setMenu: (
-		menuId: (typeof menuIds)[number],
-		open: boolean,
-		left: number,
-		top: number,
-	) => void;
-	setMenuOpen: (menuId: (typeof menuIds)[number], open: boolean) => void;
 	setMenuPosition: (
 		menuId: (typeof menuIds)[number],
 		left: number,
@@ -90,8 +87,6 @@ interface MenuStore {
 		left: number;
 		top: number;
 	};
-	getMenuPosition: (menuId: (typeof menuIds)[number]) => {
-		left: number;
-		top: number;
-	};
+	closeMenu: (menuId: (typeof menuIds)[number]) => void;
+	openMenu: (menuId: (typeof menuIds)[number]) => void;
 }
