@@ -8,14 +8,28 @@ import "./MenuButtons.scss"; // Import your SCSS file
 
 function MenuButtons() {
 	const userForm = useMenu((state) => state.getMenu("userForm"));
+	const openMenu = useMenu((state) => state.openMenu);
+	const closeMenu = useMenu((state) => state.closeMenu);
 	const impactCardList = useMenu((state) => state.getMenu("impactCardList"));
 	const clearStore = useGlobal((state) => state.clearPersistedStore);
 
-	const setMenuOpen = useMenu((state) => state.setMenuOpen);
+	const handleOnKeyDown = (e: any) => {
+		if (e.key === "Escape") {
+			closeMenu("impactCardList");
+			closeMenu("userForm");
+		}
+	}
+
+
+
 	return (
-		<div className="menu-buttons">
+		<div className="menu-buttons" onClick={() => { }}
+			onKeyDown={handleOnKeyDown}
+		>
 			<RoundButton
-				onClick={() => setMenuOpen("userForm", !userForm.open)}
+				onClick={() =>
+					userForm.open ? closeMenu("userForm") : openMenu("userForm")
+				}
 				icon="person"
 			/>
 			<div className="menu-buttons__spacer" />
@@ -26,7 +40,11 @@ function MenuButtons() {
 			<div className="menu-buttons__spacer" />
 
 			<RoundButton
-				onClick={() => setMenuOpen("impactCardList", !impactCardList.open)}
+				onClick={() =>
+					impactCardList.open
+						? closeMenu("impactCardList")
+						: openMenu("impactCardList")
+				}
 				icon="flash_on"
 			/>
 		</div>

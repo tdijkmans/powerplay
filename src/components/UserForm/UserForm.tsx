@@ -5,7 +5,7 @@ import { useMenu } from "../../stores/useMenu.store";
 import "./UserForm.scss";
 
 const UserForm: FC = () => {
-	const openMenu = useMenu((state) => state.setMenuOpen);
+	const closeMenu = useMenu((state) => state.closeMenu);
 	const setPlayerNames = useGlobal((state) => state.setPlayerNames);
 	const [firstPlayer, setFirstPlayer] = useState("");
 	const [secondPlayer, setSecondPlayer] = useState("");
@@ -25,7 +25,7 @@ const UserForm: FC = () => {
 			democrat: firstPlayer,
 			republican: secondPlayer,
 		});
-		openMenu("userForm", false);
+		closeMenu("userForm");
 	};
 
 	return (

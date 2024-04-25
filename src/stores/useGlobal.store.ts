@@ -70,9 +70,7 @@ export const useGlobal = create<GlobalStore>()(
 				return get().score;
 			},
 			grandTotal,
-			getGrandTotal: () => {
-				return get().grandTotal;
-			},
+
 			getRepublicanProgress: () => {
 				return Math.round(get().score.republican / grandTotal) * 100;
 			},

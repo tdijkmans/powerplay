@@ -5,14 +5,18 @@ import "./OneTurn.scss";
 const OneTurn: FC = () => {
 	const democratScore = useGlobal((state) => state.score.democrat);
 	const republicanScore = useGlobal((state) => state.score.republican);
+	const votesForNextLevel = (score: number) => 20 - (score % 20);
 
 	// Game rules:
 	// - Each party starts with 3 fundraising power
 	// - Each party gains 1 fundraising power for every electoral vote they have
 	const fundRaisingPower = {
-		democrat: democratScore + 3,
-		republican: republicanScore + 3,
+		democrat: Math.floor(democratScore / 20) + 3,
+		republican: Math.floor(republicanScore / 20) + 3,
 	};
+
+	const democratVotesForNextLevel = votesForNextLevel(democratScore);
+	const republicanVotesForNextLevel = votesForNextLevel(republicanScore);
 
 	return (
 		<>
@@ -23,6 +27,9 @@ const OneTurn: FC = () => {
 
 			<div className="oneturn-body">
 				<div className="oneturn-item">
+					<div className="oneturn-item__power oneturn-subitem__power--dem">
+						{democratVotesForNextLevel}
+					</div>
 					<div className="oneturn-item__power oneturn-item__power--dem">
 						{fundRaisingPower.democrat}
 					</div>
@@ -31,6 +38,9 @@ const OneTurn: FC = () => {
 					Fundraising
 					<div className="oneturn-item__power oneturn-item__power--rep">
 						{fundRaisingPower.republican}
+					</div>
+					<div className="oneturn-item__power oneturn-subitem__power--rep">
+						{republicanVotesForNextLevel}
 					</div>
 				</div>
 				<div className="oneturn-item">

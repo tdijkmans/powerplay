@@ -44,12 +44,12 @@ const ContextMenu: FC<ContextMenuProps> = ({
 	const fiftyStates = useGlobal((state) => state.fiftyStates);
 	const currentState = fiftyStates.find((s) => s.id === state.id);
 	const isVisible = useMenu((state) => state.getMenu("contextMenu")).open;
-	const position = useMenu((state) => state.getMenuPosition("contextMenu"));
+	const { top, left } = useMenu((state) => state.getMenu("contextMenu"));
 
 	return (
 		<>
 			{isVisible && (
-				<MenuCard position={position}>
+				<MenuCard position={{ top, left }}>
 					<div className="context-menu-container">
 						<div className="context-menu-top">
 							<h2 className="context-menu-title">Kies de winnaar van</h2>

@@ -11,7 +11,8 @@ import "./UsaMap.scss";
 
 const UsaMap: FC = () => {
 	const fiftyStates = useGlobal((state) => state.fiftyStates);
-	const setMenuOpen = useMenu((state) => state.setMenuOpen);
+	const openMenu = useMenu((state) => state.openMenu);
+	const closeMenu = useMenu((state) => state.closeMenu);
 	const setMenuPosition = useMenu((state) => state.setMenuPosition);
 	const handleMouseEnter = useHovered((state) => state.handleMouseEnter);
 	const handleMouseLeave = useHovered((state) => state.handleMouseLeave);
@@ -27,7 +28,7 @@ const UsaMap: FC = () => {
 	);
 
 	const hideContextMenu = () => {
-		setMenuOpen("contextMenu", false);
+		closeMenu("contextMenu");
 		setMenuPosition("contextMenu", 0, 0);
 		setClickedState({} as UsaState);
 	};
@@ -43,7 +44,7 @@ const UsaMap: FC = () => {
 	) => {
 		e.preventDefault();
 		setClickedState(fiftyStates.find((s) => s.id === state.id) as UsaState);
-		setMenuOpen("contextMenu", true);
+		openMenu("contextMenu");
 		setMenuPosition("contextMenu", e.clientX - 250, e.clientY - 250);
 	};
 
